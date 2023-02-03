@@ -21,3 +21,14 @@ Upgrades can be obtained by reaching locations on the map.
 - temple
 - statues
 - natural wonders (waterfall, lake)
+
+
+# World
+
+The world is a flat plane. Builings can be placed anywhere, as long as they don't overlap anything.
+
+Some terrain may be impassable, disallowing placement of any buildings.
+
+# World scale
+
+1 Godot unit = 10 meters
