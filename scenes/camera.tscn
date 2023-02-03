@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c4gjy7cwya4v5"]
+
+[node name="camera" type="Node3D"]
+
+[node name="pivot" type="Node3D" parent="."]
+
+[node name="arm" type="Node3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+
+[node name="camera" type="Camera3D" parent="pivot/arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+current = true

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3ddavxi6boqe"]
+
+[ext_resource type="PackedScene" uid="uid://c4gjy7cwya4v5" path="res://scenes/camera.tscn" id="1_083ty"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5m41s"]
+albedo_color = Color(0.270588, 0.529412, 0.152941, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7731s"]
+material = SubResource("StandardMaterial3D_5m41s")
+size = Vector2(5000, 5000)
+
+[node name="map" type="Node3D"]
+
+[node name="terrain" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_7731s")
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -500, 500, 500)
+light_angular_distance = 90.0
+shadow_enabled = true
+
+[node name="camera" parent="." instance=ExtResource("1_083ty")]
+
+[node name="objects" type="Node3D" parent="."]
