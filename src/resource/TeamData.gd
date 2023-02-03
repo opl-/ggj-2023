@@ -1,4 +1,5 @@
 class_name TeamData
+extends Resource
 
 @export var currency_amount = {}
 
