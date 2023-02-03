@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0h0yml70xirr"]
+[gd_scene load_steps=4 format=3 uid="uid://c0h0yml70xirr"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_lw3oy"]
+[ext_resource type="PackedScene" uid="uid://bp7nua1uyq7hc" path="res://scenes/camera.tscn" id="2_qtqhs"]
 [ext_resource type="PackedScene" uid="uid://b3ddavxi6boqe" path="res://scenes/map.tscn" id="2_rgn1w"]
 
 [node name="game" type="Node3D"]
 script = ExtResource("1_lw3oy")
+
+[node name="camera" parent="." instance=ExtResource("2_qtqhs")]
+camera_distance_max = 100
 
 [node name="map" parent="." instance=ExtResource("2_rgn1w")]

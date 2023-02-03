@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3ddavxi6boqe"]
+[gd_scene load_steps=12 format=3 uid="uid://b3ddavxi6boqe"]
 
-[ext_resource type="PackedScene" uid="uid://c4gjy7cwya4v5" path="res://scenes/camera.tscn" id="1_083ty"]
 [ext_resource type="Shader" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="1_oo8lf"]
 [ext_resource type="Texture2D" uid="uid://c4ggdp0kg5wjk" path="res://addons/simplegrasstextured/textures/grassbushcc008.png" id="2_ngfa4"]
 [ext_resource type="Texture2D" uid="uid://i566v0wqsfa" path="res://addons/simplegrasstextured/images/win_pattern.png" id="3_o5aki"]
@@ -88,9 +87,6 @@ metadata/SimpleGrassTextured = "1.0.2"
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -500, 500, 500)
 light_angular_distance = 90.0
 shadow_enabled = true
-
-[node name="camera" parent="." instance=ExtResource("1_083ty")]
-camera_distance_max = 100
 
 [node name="objects" type="Node3D" parent="."]
 
