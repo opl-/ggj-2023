@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4gjy7cwya4v5"]
+[gd_scene load_steps=2 format=3 uid="uid://bp7nua1uyq7hc"]
 
-[ext_resource type="Script" path="res://scenes/camera.gd" id="1_pk17d"]
+[ext_resource type="Script" path="res://src/GameCamera.gd" id="1_wxqyt"]
 
 [node name="camera" type="Node3D"]
-script = ExtResource("1_pk17d")
+script = ExtResource("1_wxqyt")
 
 [node name="pivot" type="Node3D" parent="."]
 
