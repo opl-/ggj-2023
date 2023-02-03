@@ -2,8 +2,8 @@ class_name Game
 extends Node
 
 var team_data = {
-	Const.Team.PLAYER: TeamData.new(),
-	Const.Team.ENEMY: TeamData.new(),
+	Const.Team.PLAYER: TeamData.new(self),
+	Const.Team.ENEMY: TeamData.new(self),
 }
 
 ## Sent when a new building appears on the map
@@ -13,6 +13,9 @@ signal building_placed(building: Building)
 signal building_destroyed(building: Building)
 
 func _ready():
+	bind_hubs()
+
+func bind_hubs():
 	# Find team hubs from map data
 	var hubs := find_children("*", "Hub")
 	for hub in hubs:

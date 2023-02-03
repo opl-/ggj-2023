@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3ddavxi6boqe"]
+[gd_scene load_steps=13 format=3 uid="uid://b3ddavxi6boqe"]
 
 [ext_resource type="Shader" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="1_oo8lf"]
 [ext_resource type="Texture2D" uid="uid://c4ggdp0kg5wjk" path="res://addons/simplegrasstextured/textures/grassbushcc008.png" id="2_ngfa4"]
 [ext_resource type="Texture2D" uid="uid://i566v0wqsfa" path="res://addons/simplegrasstextured/images/win_pattern.png" id="3_o5aki"]
 [ext_resource type="Script" path="res://addons/simplegrasstextured/grass.gd" id="4_c1w5e"]
+[ext_resource type="PackedScene" uid="uid://c5gluj87v2mi" path="res://object/building/Lumberjack.tscn" id="6_fe7jk"]
 [ext_resource type="PackedScene" uid="uid://dm1fs7o10va5q" path="res://object/building/Hub.tscn" id="6_wslei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5m41s"]
@@ -99,3 +100,7 @@ team = 0
 [node name="EnemyHub" parent="buildings" instance=ExtResource("6_wslei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0862, 0, 7.08339)
 team = 1
+
+[node name="Lumberjack" parent="buildings" instance=ExtResource("6_fe7jk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.68432, 0, 8.98911)
+team = 0

@@ -1,28 +1,46 @@
 class_name Building
 extends Node3D
 
-@onready var game: Game = get_node("/root/game")
+@onready var game: Game = $"/root/game"
 
 @export var team: Const.Team
 
-## How much this building affects the change of each currency every game tick
-@export var currency_change: Array[CurrencyChange] = []
+## How much the building can produce.
+@export var currency_modifier := CurrencyStore.new()
+
+## Squared maximum distance for the links this building supports.
+var max_link_length_sq: float = 5 * 5
+
+## Stores all links to other buildings.
+var links: Array[BuildingLink] = []
 
 func _ready():
-	game.building_placed.emit(self)
+	var team_data := game.get_team(team)
+
+	team_data.building_placed.emit(self)
+	team_data.building_placed.connect(on_building_placed)
+	team_data.building_destroyed.connect(on_building_destroyed)
 
 func _process(delta: float):
 	pass
 
-func get_or_create_currency_change(currency: Const.Currency) -> CurrencyChange:
-	var existing = currency_change[currency]
-	if existing:
-		return existing
+func on_building_placed(other_building: Building):
+	# Check if the other building is in range.
+	var distance_sq = position.distance_squared_to(other_building.position)
+	if (distance_sq > max_link_length_sq):
+		return
 
-	var instance = CurrencyChange.new()
-	instance.currency = currency
-	currency_change[currency] = instance
-	return instance
+	# Create a link both ways - the other building doesn't populate its own links.
+	links.push_back(BuildingLink.new(self, other_building))
+	other_building.links.push_back(BuildingLink.new(other_building, self))
+	
+func on_building_destroyed(other_building: Building):
+	for link_index in links.size():
+		var link := links[link_index]
+		if link.to == other_building:
+			links.remove_at(link_index)
+			break
 
-func set_currency_change(currency: Const.Currency, change_per_tick: float):
-	get_or_create_currency_change(currency).change = change_per_tick
+func request_currency(currency: Const.Currency, amount: float = 1):
+	# TODO: create a request ticket or something
+	pass

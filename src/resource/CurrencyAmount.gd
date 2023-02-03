@@ -1,7 +1,10 @@
 ## Represents a modifier for how much a currency changes every game tick
-class_name CurrencyChange
+class_name CurrencyAmount
 extends Resource
 
 @export var currency: Const.Currency
 
-@export var change: float = 0
+@export var amount: float = 0
+
+func _init(currency: Const.Currency):
+	self.currency = currency
