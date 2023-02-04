@@ -6,4 +6,4 @@ Some terrain may be impassable, disallowing placement of any buildings.
 
 ## Scale
 
-1 Godot unit = 10 meters
+1 Godot unit = 1 meter
