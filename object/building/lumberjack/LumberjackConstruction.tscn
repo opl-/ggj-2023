@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://d14qd6v7mgsdj"]
 
-[ext_resource type="ArrayMesh" uid="uid://bj4nvp3uy4olh" path="res://assets/OBJ/Storage_FirstAge_Level2.obj" id="1_s1swv"]
+[ext_resource type="ArrayMesh" uid="uid://bstdgtw8lfwtq" path="res://assets/mesh/Storage_FirstAge_Level2.obj" id="1_l3h52"]
 [ext_resource type="PackedScene" uid="uid://c2jmbcd4lfuc5" path="res://object/building/lumberjack/LumberjackCommon.tscn" id="2_8i1mb"]
 
-[node name="LumberjackConstruct" type="Node3D"]
+[node name="LumberjackConstruction" type="Node3D"]
 
 [node name="StorageFirstAgeLevel2" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -1)
-mesh = ExtResource("1_s1swv")
+mesh = ExtResource("1_l3h52")
 
 [node name="LumberjackCommon" parent="." instance=ExtResource("2_8i1mb")]

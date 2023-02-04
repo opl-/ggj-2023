@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cvv8majkmnpsw" path="res://object/building/farm/FarmCommon.tscn" id="1_07cgy"]
 [ext_resource type="ArrayMesh" uid="uid://cd7rsgx5bpq2m" path="res://assets/OBJ/Farm_SecondAge_Level1.obj" id="2_wqk72"]
-[ext_resource type="ArrayMesh" uid="uid://dql5wi5oj2iba" path="res://assets/OBJ/Farm_SecondAge_Level1_Wheat.obj" id="3_a24lm"]
+[ext_resource type="ArrayMesh" uid="uid://b314pictkek5i" path="res://assets/mesh/Farm_SecondAge_Level1_Wheat.obj" id="3_8sp27"]
 
 [node name="FarmConstruction" type="Node3D"]
 
@@ -14,4 +14,4 @@ mesh = ExtResource("2_wqk72")
 
 [node name="FarmSecondAgeLevel1Wheat" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 4)
-mesh = ExtResource("3_a24lm")
+mesh = ExtResource("3_8sp27")
