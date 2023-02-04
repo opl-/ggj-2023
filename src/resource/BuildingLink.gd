@@ -7,7 +7,7 @@ extends Resource
 
 var distance: float
 
-func _init(from: Building, to: Building):
-	self.from = from
-	self.to = to
+func _init(_from: Building, _to: Building):
+	self.from = _from
+	self.to = _to
 	distance = from.position.distance_to(to.position)

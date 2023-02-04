@@ -23,7 +23,7 @@ func _ready():
 	team_data.building_placed.connect(on_building_placed)
 	team_data.building_destroyed.connect(on_building_destroyed)
 
-func _process(delta: float):
+func _process(_delta: float):
 	pass
 
 func on_building_placed(other_building: Building):
@@ -45,5 +45,5 @@ func on_building_destroyed(other_building: Building):
 
 ## Called when the building is supposed to obtain currency. Custom building types should override this function.
 ## If false is returned, the currency is rejected, and presumably could go back to some pool.
-func receive_currency(currency: Const.Currency, amount: float) -> bool:
+func receive_currency(_currency: Const.Currency, _amount: float) -> bool:
 	return false

@@ -13,8 +13,8 @@ signal building_placed(building: Building)
 ## Sent when a building owned by this team is destroyed,
 signal building_destroyed(building: Building)
 
-func _init(game: Game):
-	self.game = game
+func _init(_game: Game):
+	self.game = _game
 
 	building_placed.connect(on_building_placed)
 	building_destroyed.connect(on_building_destroyed)

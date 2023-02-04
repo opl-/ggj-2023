@@ -47,6 +47,10 @@ place={
 
 3d_physics/layer_2="Terrain"
 
+[physics]
+
+common/physics_ticks_per_second=144
+
 [rendering]
 
 renderer/rendering_method="mobile"

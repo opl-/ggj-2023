@@ -30,7 +30,7 @@ func bind_hubs():
 		if team_data[team].hub == null:
 			printerr("Team " + str(team) + " has no hub")
 
-func _process(delta: float):
+func _process(_delta: float):
 	pass
 
 func get_team(team: Const.Team) -> TeamData:

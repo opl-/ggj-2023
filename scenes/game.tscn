@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://c0h0yml70xirr"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_lw3oy"]
-[ext_resource type="PackedScene" uid="uid://bp7nua1uyq7hc" path="res://scenes/camera.tscn" id="2_qtqhs"]
+[ext_resource type="PackedScene" uid="uid://c4gjy7cwya4v5" path="res://scenes/camera.tscn" id="2_qtqhs"]
 [ext_resource type="PackedScene" uid="uid://b3ddavxi6boqe" path="res://scenes/map.tscn" id="2_rgn1w"]
 [ext_resource type="Script" path="res://src/player/PlacementController.gd" id="4_nyn4v"]
 [ext_resource type="Script" path="res://src/resource/CurrencyAmount.gd" id="5_p1p6f"]
 [ext_resource type="Script" path="res://src/resource/CurrencyStore.gd" id="6_kgbbw"]
 [ext_resource type="Script" path="res://src/resource/BuildingSchematic.gd" id="7_ayfoq"]
-[ext_resource type="PackedScene" uid="uid://c5gluj87v2mi" path="res://object/building/Lumberjack.tscn" id="7_iu42q"]
-[ext_resource type="PackedScene" uid="uid://d14qd6v7mgsdj" path="res://object/building/LumberjackConstruct.tscn" id="8_36hg8"]
+[ext_resource type="PackedScene" path="res://object/building/Lumberjack.tscn" id="7_iu42q"]
+[ext_resource type="PackedScene" path="res://object/building/LumberjackConstruct.tscn" id="8_36hg8"]
 
 [sub_resource type="Resource" id="Resource_0yjcp"]
 script = ExtResource("5_p1p6f")

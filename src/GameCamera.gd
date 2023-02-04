@@ -2,12 +2,16 @@ class_name GameCamera
 extends Node3D
 
 const DEADZONE : float = 0.05
-const MOVEMENT_AXIS_X = JOY_AXIS_LEFT_X
-const MOVEMENT_AXIS_Y = JOY_AXIS_LEFT_Y
-const CAMERA_AXIS_X = JOY_AXIS_RIGHT_X
-const CAMERA_AXIS_Y = JOY_AXIS_RIGHT_Y
-const CAMERA_AXIS_ZOOM_IN = JOY_AXIS_TRIGGER_RIGHT
-const CAMERA_AXIS_ZOOM_OUT = JOY_AXIS_TRIGGER_LEFT
+const MOVEMENT_AXIS_X : int = JOY_AXIS_LEFT_X
+const MOVEMENT_AXIS_Y : int = JOY_AXIS_LEFT_Y
+#const CAMERA_AXIS_X = JOY_AXIS_RIGHT_X
+#const CAMERA_AXIS_Y = JOY_AXIS_RIGHT_Y
+#const CAMERA_AXIS_ZOOM_IN = JOY_AXIS_TRIGGER_RIGHT
+#const CAMERA_AXIS_ZOOM_OUT = JOY_AXIS_TRIGGER_LEFT
+const CAMERA_AXIS_X : int = 3
+const CAMERA_AXIS_Y : int = 4
+const CAMERA_AXIS_ZOOM_IN : int = 5
+const CAMERA_AXIS_ZOOM_OUT : int = 2
 
 @export var device_id : int = 0
 @export var rotate_speed : int = 100
@@ -37,7 +41,7 @@ var _camera_distance : float = 0
 var mouse_drag : bool = false
 
 func _ready() -> void:
-	var current_rotation = self.camera_pivot.get_rotation_degrees()
+	var current_rotation : Vector3 = self.camera_pivot.get_rotation_degrees()
 	camera_angle_y = current_rotation.y
 	_camera_angle_y = current_rotation.y
 
@@ -49,7 +53,7 @@ func _ready() -> void:
 	camera_distance = current_rotation.z
 	_camera_distance = current_rotation.z
 
-func _input(event) -> void:
+func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("mouse_zoom_in"):
 		self._mouse_zoom_in()
 	if event.is_action_pressed("mouse_zoom_out"):
@@ -78,18 +82,22 @@ func _process(_delta) -> void:
 		self.camera_lens.set_position(Vector3(0, 0, _camera_distance))
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta : float) -> void:
 	self.process_free_camera_input(delta)
 	self.process_movement_input(delta)
 
-func process_free_camera_input(delta):
-	var axis_value = Vector2()
+func process_free_camera_input(delta : float) -> void:
+	var axis_value : Vector2 = Vector2()
 	axis_value.x = Input.get_joy_axis(self.device_id, CAMERA_AXIS_X)
 	axis_value.y = Input.get_joy_axis(self.device_id, CAMERA_AXIS_Y)
 
-	var zoom_value = Vector2()
+	var zoom_value : Vector2 = Vector2()
 	zoom_value.x = Input.get_joy_axis(self.device_id, CAMERA_AXIS_ZOOM_IN)
 	zoom_value.y = Input.get_joy_axis(self.device_id, CAMERA_AXIS_ZOOM_OUT)
+	if zoom_value.x != 0:
+		zoom_value.x = (zoom_value.x + 1.0) / 2.0
+	if zoom_value.y != 0:
+		zoom_value.y = (zoom_value.y + 1.0) / 2.0
 
 	if abs(axis_value.x) > DEADZONE:
 		camera_angle_y -= self.rotate_speed * axis_value.x * delta
@@ -112,15 +120,15 @@ func process_free_camera_input(delta):
 		camera_distance += self.zoom_speed * zoom_value.y * delta
 		camera_distance = clamp(camera_distance, self.camera_distance_min, self.camera_distance_max)
 
-func process_movement_input(delta) -> void:
-	var axis_value = Vector2()
+func process_movement_input(delta : float) -> void:
+	var axis_value : Vector2 = Vector2()
 
 	axis_value.x = -Input.get_joy_axis(self.device_id, MOVEMENT_AXIS_X)
 	axis_value.y = -Input.get_joy_axis(self.device_id, MOVEMENT_AXIS_Y)
 	axis_value = axis_value.rotated(deg_to_rad(-self.camera_angle_y))
 
 	if axis_value.length() > self.DEADZONE:
-		var current_position = self.get_position()
+		var current_position : Vector3 = self.get_position()
 		current_position.x -= axis_value.x * self.move_speed * delta
 		current_position.z -= axis_value.y * self.move_speed * delta
 		current_position.x = clamp(current_position.x, -self.camera_space_size, self.camera_space_size)
@@ -129,24 +137,24 @@ func process_movement_input(delta) -> void:
 
 
 
-func _shift_camera_translation(offset) -> void:
-	var current_position = self.get_position()
+func _shift_camera_translation(offset : Vector2) -> void:
+	var current_position : Vector3 = self.get_position()
 	current_position.x += offset.x
 	current_position.z += offset.y
 	current_position.x = clamp(current_position.x, -self.camera_space_size, self.camera_space_size)
 	current_position.z = clamp(current_position.z, -self.camera_space_size, self.camera_space_size)
 	self.set_position(current_position)
 
-func _mouse_zoom_in():
+func _mouse_zoom_in() -> void:
 	camera_distance -= self.mouse_zoom_step
 	camera_distance = clamp(camera_distance, self.camera_distance_min, self.camera_distance_max)
 
 
-func _mouse_zoom_out():
+func _mouse_zoom_out() -> void:
 	camera_distance += self.mouse_zoom_step
 	camera_distance = clamp(camera_distance, self.camera_distance_min, self.camera_distance_max)
 
-func _mouse_shift_camera(relative_offset) -> void:
+func _mouse_shift_camera(relative_offset : Vector2) -> void:
 	var camera_fraction
 	camera_fraction = self.camera_distance / self.camera_distance_max
 	relative_offset = relative_offset * camera_fraction * 0.25

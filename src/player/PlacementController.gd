@@ -40,9 +40,9 @@ func _input(event):
 		var camera = game_camera.camera_lens
 
 		placement_ray_origin = camera.project_ray_origin(event.position)
-		placement_ray_end = camera.project_ray_normal(event.position) * 150
+		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 150
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if placement_ghost != null && placement_ray_origin != null:
 		var space_state = game.get_world_3d().direct_space_state
 
