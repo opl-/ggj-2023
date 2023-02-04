@@ -16,6 +16,13 @@ func get_or_create_currency(currency: Const.Currency) -> CurrencyAmount:
 	currency_amounts[currency] = instance
 	return instance
 
+func get_existing() -> Array[CurrencyAmount]:
+	var out: Array[CurrencyAmount] = []
+	for currency_amount in currency_amounts:
+		if currency_amount != null && currency_amount.amount != 0:
+			out.push_back(currency_amount)
+	return out
+
 func get_currency_amount(currency: Const.Currency) -> float:
 	var instance = get_currency(currency)
 	return instance.amount if (instance != null) else 0
