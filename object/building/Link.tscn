@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/resource/LinkView.gd" id="1_h6c0d"]
+[ext_resource type="ArrayMesh" uid="uid://dpc45k76ae84o" path="res://assets/mesh/WoodLog_Moss.obj" id="2_j3iwp"]
+
+[sub_resource type="Curve3D" id="Curve3D_ry4o0"]
+
+[node name="Link" type="Node3D"]
+script = ExtResource("1_h6c0d")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_ry4o0")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+mesh = ExtResource("2_j3iwp")

@@ -14,6 +14,6 @@ extends Control
 			label.text = value
 		visible = value != null && value.length() > 0
 
-func _process(delta):
+func _process(_delta):
 	size = label_container.size + Vector2(24, 24)
 	pass

@@ -4,6 +4,8 @@ extends Control
 
 @onready var game_camera: GameCamera = game.find_child("camera")
 
+var site_template := preload("res://object/building/ConstructionSiteTemplate.tscn")
+
 ## Team assigned to the buildings after construction.
 @export var team: Const.Team = Const.Team.PLAYER
 
@@ -61,7 +63,7 @@ func _unhandled_input(event):
 		get_viewport().set_input_as_handled()
 
 		# Convert ghost into the construction site
-		var site: ConstructionSite = preload("res://object/building/ConstructionSiteTemplate.tscn").instantiate()
+		var site: ConstructionSite = site_template.instantiate()
 		site.schematic = selected_schematic
 		site.team = team
 

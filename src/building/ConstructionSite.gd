@@ -9,8 +9,6 @@ var remaining_costs := CurrencyStore.new()
 
 func _ready():
 	super._ready()
-	# TODO: This should probably copy the lnk length from the building.
-	max_link_length_sq = 10 * 10
 
 	for cost in schematic.cost.get_existing():
 		remaining_costs.set_currency_amount(cost.currency, cost.amount)
@@ -41,8 +39,10 @@ func receive_currency(currency: Const.Currency, amount: float) -> bool:
 	return false
 
 func finish_construction():
+	var team_data := game.get_team(team)
 	var building: Building = schematic.scene_completed.instantiate()
 	building.team = team
-	get_parent().add_child(building)
 	building.global_transform = global_transform
-	get_parent().remove_child(self)
+	get_parent().add_child(building)
+	team_data.building_destroyed.emit(self)
+	queue_free()
