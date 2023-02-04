@@ -14,6 +14,8 @@ var max_link_length_sq: float = 5 * 5
 ## Stores all links to other buildings.
 var links: Array[BuildingLink] = []
 
+signal request_currency(currency: Const.Currency, amount: float)
+
 func _ready():
 	var team_data := game.get_team(team)
 
@@ -31,8 +33,8 @@ func on_building_placed(other_building: Building):
 		return
 
 	# Create a link both ways - the other building doesn't populate its own links.
-	links.push_back(BuildingLink.new(self, other_building))
-	other_building.links.push_back(BuildingLink.new(other_building, self))
+	#links.push_back(BuildingLink.new(self, other_building))
+#other_building.links.push_back(BuildingLink.new(other_building, self))
 	
 func on_building_destroyed(other_building: Building):
 	for link_index in links.size():
@@ -41,6 +43,7 @@ func on_building_destroyed(other_building: Building):
 			links.remove_at(link_index)
 			break
 
-func request_currency(currency: Const.Currency, amount: float = 1):
-	# TODO: create a request ticket or something
-	pass
+## Called when the building is supposed to obtain currency. Custom building types should override this function.
+## If false is returned, the currency is rejected, and presumably could go back to some pool.
+func receive_currency(currency: Const.Currency, amount: float) -> bool:
+	return false

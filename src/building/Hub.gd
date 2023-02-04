@@ -1,5 +1,5 @@
 class_name Hub
-extends "res://src/building/Building.gd"
+extends Building
 
 func _ready():
 	super._ready()

@@ -21,7 +21,7 @@ func bind_hubs():
 	for hub in hubs:
 		var hub_team = get_team(hub.team)
 		if hub_team.hub != null:
-			printerr("Found duplicate hub for team " + hub.team + " at " + hub.get_path())
+			printerr("Found duplicate hub for team " + str(hub.team) + " at " + str(hub.get_path()))
 		else:
 			hub_team.hub = hub
 

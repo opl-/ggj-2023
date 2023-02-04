@@ -1,17 +1,19 @@
 class_name CurrencyStore
 extends Resource
 
-@export var currency_amount: Array[CurrencyAmount] = []
+@export var currency_amounts: Array[CurrencyAmount] = []
 
 func get_currency(currency: Const.Currency) -> CurrencyAmount:
-	return currency_amount[currency]
+	return currency_amounts[currency] if (currency < currency_amounts.size()) else null
 
 func get_or_create_currency(currency: Const.Currency) -> CurrencyAmount:
-	var instance = get_currency_amount(currency)
+	var instance = get_currency(currency)
 	if instance != null:
 		return instance
-	instance = CurrencyAmount.new(currency)
-	currency_amount[currency] = instance
+	instance = CurrencyAmount.new()
+	instance.currency = currency
+	currency_amounts.resize(max(currency_amounts.size(), currency + 1))
+	currency_amounts[currency] = instance
 	return instance
 
 func get_currency_amount(currency: Const.Currency) -> float:

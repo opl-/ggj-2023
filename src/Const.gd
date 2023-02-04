@@ -10,3 +10,7 @@ enum Currency {
 	PEOPLE,
 	WOOD,
 }
+
+enum Collision3D {
+	TERRAIN = 2,
+}

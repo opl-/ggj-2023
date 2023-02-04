@@ -16,10 +16,17 @@ signal building_destroyed(building: Building)
 func _init(game: Game):
 	self.game = game
 
-	game.building_placed.connect(on_building_placed)
-	game.building_destroyed.connect(on_building_destroyed)
+	building_placed.connect(on_building_placed)
+	building_destroyed.connect(on_building_destroyed)
 
 func on_building_placed(building: Building):
+	# TODO: dev code - immediately grant requsted currency
+	building.connect(
+		"request_currency",
+		func(currency: Const.Currency, amount: float):
+			building.receive_currency(currency, amount)
+	)
+
 	game.building_placed.emit(building)
 
 func on_building_destroyed(building: Building):

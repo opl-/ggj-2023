@@ -66,6 +66,7 @@ buffer = PackedFloat32Array(0.977931, 0, 0.208928, -3.33111, 0, 1, 0, 0, -0.2089
 mesh = SubResource("PlaneMesh_7731s")
 
 [node name="body" type="StaticBody3D" parent="terrain"]
+collision_layer = 3
 
 [node name="collision" type="CollisionShape3D" parent="terrain/body"]
 shape = SubResource("WorldBoundaryShape3D_uvbkp")

@@ -5,6 +5,3 @@ extends Resource
 @export var currency: Const.Currency
 
 @export var amount: float = 0
-
-func _init(currency: Const.Currency):
-	self.currency = currency

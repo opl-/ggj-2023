@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://df27v7kd1otxq"]
+
+[ext_resource type="Script" path="res://src/building/ConstructionSite.gd" id="1_v204w"]
+
+[node name="ConstructionSiteTemplate" type="Node3D"]
+script = ExtResource("1_v204w")
