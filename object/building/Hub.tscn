@@ -8,7 +8,6 @@
 
 [node name="Hub" type="Node3D"]
 script = ExtResource("1_chpvr")
-currency_change = null
 
 [node name="collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
