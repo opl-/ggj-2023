@@ -59,5 +59,4 @@ func finish_construction():
 	building.team = team
 	building.global_transform = global_transform
 	get_parent().add_child(building)
-	team_data.building_destroyed.emit(self)
-	queue_free()
+	destroy()

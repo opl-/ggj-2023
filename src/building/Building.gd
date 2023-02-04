@@ -29,6 +29,10 @@ func _ready():
 func _process(_delta: float):
 	pass
 
+func destroy():
+	game.get_team(team).building_destroyed.emit(self)
+	queue_free()
+
 func on_building_placed(other_building: Building):
 	# Check if the other building is in range.
 	var distance_sq := position.distance_squared_to(other_building.position)
