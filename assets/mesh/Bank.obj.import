@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bx667005odrvn"
+path="res://.godot/imported/Bank.obj-10ab2984c9dfbb30f98ec43d5fd81d9e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bank.obj-10ab2984c9dfbb30f98ec43d5fd81d9e.mesh"]
+
+source_file="res://assets/mesh/Bank.obj"
+dest_files=["res://.godot/imported/Bank.obj-10ab2984c9dfbb30f98ec43d5fd81d9e.mesh", "res://.godot/imported/Bank.obj-10ab2984c9dfbb30f98ec43d5fd81d9e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

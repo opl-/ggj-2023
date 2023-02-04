@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm1fs7o10va5q"]
+[gd_scene load_steps=5 format=3 uid="uid://dm1fs7o10va5q"]
 
 [ext_resource type="Script" path="res://src/building/Hub.gd" id="1_chpvr"]
 [ext_resource type="ArrayMesh" uid="uid://c3muk4mxn07u7" path="res://assets/mesh/BirchTree_4.obj" id="2_ob7p1"]
+[ext_resource type="ArrayMesh" uid="uid://bx667005odrvn" path="res://assets/mesh/Bank.obj" id="3_vrfav"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rxdmy"]
-size = Vector3(10, 10, 10)
+size = Vector3(25, 25, 20)
 
 [node name="Hub" type="Node3D"]
 script = ExtResource("1_chpvr")
@@ -18,6 +19,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 shape = SubResource("BoxShape3D_rxdmy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 8.48055, 0, 1.91409)
 mesh = ExtResource("2_ob7p1")
+skeleton = NodePath("../collider/shape")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -4.12668, 0, 0.6639)
+mesh = ExtResource("3_vrfav")
 skeleton = NodePath("../collider/shape")
