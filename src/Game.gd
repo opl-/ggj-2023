@@ -6,6 +6,8 @@ var team_data = {
 	Const.Team.ENEMY: TeamData.new(self),
 }
 
+@onready var tooltip: Tooltip = $"ui/Tooltip"
+
 ## Sent when a new building appears on the map
 signal building_placed(building: Building)
 

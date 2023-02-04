@@ -1,30 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0h0yml70xirr"]
+[gd_scene load_steps=6 format=3 uid="uid://b46742ymk7abw"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_lw3oy"]
 [ext_resource type="PackedScene" uid="uid://bp7nua1uyq7hc" path="res://scenes/camera.tscn" id="2_qtqhs"]
-[ext_resource type="PackedScene" uid="uid://b3ddavxi6boqe" path="res://scenes/map.tscn" id="2_rgn1w"]
-[ext_resource type="Script" path="res://src/player/PlacementController.gd" id="4_nyn4v"]
-[ext_resource type="Script" path="res://src/resource/CurrencyAmount.gd" id="5_p1p6f"]
-[ext_resource type="Script" path="res://src/resource/CurrencyStore.gd" id="6_kgbbw"]
-[ext_resource type="Script" path="res://src/resource/BuildingSchematic.gd" id="7_ayfoq"]
-[ext_resource type="PackedScene" uid="uid://c5gluj87v2mi" path="res://object/building/Lumberjack.tscn" id="7_iu42q"]
-[ext_resource type="PackedScene" uid="uid://d14qd6v7mgsdj" path="res://object/building/LumberjackConstruct.tscn" id="8_36hg8"]
-
-[sub_resource type="Resource" id="Resource_0yjcp"]
-script = ExtResource("5_p1p6f")
-currency = 2
-amount = 2.0
-
-[sub_resource type="Resource" id="Resource_4ysar"]
-script = ExtResource("6_kgbbw")
-currency_amounts = Array[ExtResource("5_p1p6f")]([SubResource("Resource_0yjcp")])
-
-[sub_resource type="Resource" id="Resource_ksgej"]
-script = ExtResource("7_ayfoq")
-cost = SubResource("Resource_4ysar")
-name = "Lumberjack"
-scene_construction = ExtResource("8_36hg8")
-scene_completed = ExtResource("7_iu42q")
+[ext_resource type="PackedScene" uid="uid://ctx3btlhk2m8b" path="res://scenes/map.tscn" id="2_rgn1w"]
+[ext_resource type="PackedScene" uid="uid://bj84gsosgl17m" path="res://object/ui/PlacementController.tscn" id="4_qf6ns"]
+[ext_resource type="PackedScene" uid="uid://cx1ri8k311rba" path="res://object/ui/Tooltip.tscn" id="12_g0wb6"]
 
 [node name="game" type="Node3D"]
 script = ExtResource("1_lw3oy")
@@ -48,11 +28,8 @@ grow_vertical = 2
 [node name="content" type="Control" parent="ui"]
 layout_mode = 2
 
-[node name="placementController" type="VBoxContainer" parent="ui/content"]
+[node name="PlacementController" parent="ui/content" instance=ExtResource("4_qf6ns")]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-alignment = 2
-script = ExtResource("4_nyn4v")
-schematics = Array[ExtResource("7_ayfoq")]([SubResource("Resource_ksgej")])
+
+[node name="Tooltip" parent="ui" instance=ExtResource("12_g0wb6")]
+layout_mode = 2

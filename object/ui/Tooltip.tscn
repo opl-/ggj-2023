@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx1ri8k311rba"]
+
+[ext_resource type="Script" path="res://src/Tooltip.gd" id="1_cwe6h"]
+
+[node name="Tooltip" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.3
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_cwe6h")
+
+[node name="padding" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="padding"]
+layout_mode = 2
+text = "hello world"

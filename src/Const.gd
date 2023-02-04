@@ -13,4 +13,5 @@ enum Currency {
 
 enum Collision3D {
 	TERRAIN = 2,
+	BUILDING = 3,
 }

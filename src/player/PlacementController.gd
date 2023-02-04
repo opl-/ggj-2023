@@ -1,6 +1,6 @@
 extends Control
 
-@onready var game: Game = $"/root/game"
+@onready var game:  = $"/root/game"
 
 @onready var game_camera: GameCamera = game.find_child("camera")
 
@@ -17,16 +17,24 @@ var selected_schematic: BuildingSchematic:
 		if value == null:
 			if placement_ghost != null:
 				placement_ghost.queue_free()
+				game.tooltip.text = ""
 				placement_ghost = null
+				placement_ghost_collider = null
 		else:
 			# Create ghost
 			placement_ghost = value.scene_construction.instantiate()
+			var areas := placement_ghost.find_children("*", "Area3D")
+			if areas.size() > 0:
+				placement_ghost_collider = areas[0] as Area3D
+				placement_ghost_collider.monitoring = true
 			game.add_child(placement_ghost)
 
 		selected_schematic = value
 
-## Stores a reference to the ghosted thing the player is currently trying to place, if any. Also used as the obejct which gets converted into a construction site.
+## Stores a reference to the ghosted thing the player is currently trying to place, if any. Also used as the object which gets converted into a construction site.
 var placement_ghost: Node3D
+var placement_ghost_collider: Area3D
+var placement_valid: bool = false
 
 var placement_ray_origin: Vector3
 var placement_ray_end: Vector3
@@ -46,7 +54,14 @@ func _input(event):
 		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 150
 
 func _physics_process(_delta: float):
-	if placement_ghost != null && placement_ray_origin != null:
+	if placement_ghost != null:
+		update_placement_ghost()
+
+func update_placement_ghost():
+	# Always assume the placement position is valid until proven otherwise.
+	placement_valid = true
+
+	if placement_ray_origin != null:
 		var space_state: PhysicsDirectSpaceState3D = game.get_world_3d().direct_space_state
 
 		var query := PhysicsRayQueryParameters3D.create(placement_ray_origin, placement_ray_end, Const.Collision3D.TERRAIN)
@@ -57,8 +72,18 @@ func _physics_process(_delta: float):
 			placement_ghost.visible = true
 		else:
 			placement_ghost.visible = false
+			placement_valid = false
 
-	if placement_ghost != null && placement_ghost.visible && Input.is_action_just_pressed("place"):
+	# Make sure the placement location doesn't overlap anything else, but only if the cursor is over land, and the building has a collider.
+	if placement_valid && placement_ghost_collider != null && placement_ghost_collider.has_overlapping_areas():
+		placement_valid = false
+
+	if !placement_valid:
+		game.tooltip.text = "Invalid placement location"
+	else:
+		game.tooltip.text = ""
+
+	if placement_valid && Input.is_action_just_pressed("place"):
 		# Convert ghost into the construction site
 		var site: ConstructionSite = preload("res://object/building/ConstructionSiteTemplate.tscn").instantiate()
 		site.schematic = selected_schematic
@@ -74,6 +99,8 @@ func _physics_process(_delta: float):
 
 		# Drop reference to the ghost to make sure it doesn't get deleted
 		placement_ghost = null
+		placement_ghost_collider.monitoring = false
+		placement_ghost_collider = null
 		var stored_schematic := selected_schematic
 		selected_schematic = null
 

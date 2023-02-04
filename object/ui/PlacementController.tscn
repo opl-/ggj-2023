@@ -1,0 +1,50 @@
+[gd_scene load_steps=15 format=3 uid="uid://bj84gsosgl17m"]
+
+[ext_resource type="Script" path="res://src/player/PlacementController.gd" id="1_5gvqo"]
+[ext_resource type="Script" path="res://src/resource/CurrencyAmount.gd" id="2_ndgy0"]
+[ext_resource type="Script" path="res://src/resource/CurrencyStore.gd" id="3_220h4"]
+[ext_resource type="PackedScene" uid="uid://c5gluj87v2mi" path="res://object/building/lumberjack/Lumberjack.tscn" id="4_tcwnn"]
+[ext_resource type="PackedScene" uid="uid://d14qd6v7mgsdj" path="res://object/building/lumberjack/LumberjackConstruction.tscn" id="5_5iuf7"]
+[ext_resource type="Script" path="res://src/resource/BuildingSchematic.gd" id="6_gay8s"]
+[ext_resource type="PackedScene" uid="uid://decsu8gpcwrc7" path="res://object/building/farm/Farm.tscn" id="7_njgw4"]
+[ext_resource type="PackedScene" uid="uid://h0a7yvfmrr1r" path="res://object/building/farm/FarmConstruction.tscn" id="8_m1qyq"]
+
+[sub_resource type="Resource" id="Resource_0yjcp"]
+script = ExtResource("2_ndgy0")
+currency = 2
+amount = 2.0
+
+[sub_resource type="Resource" id="Resource_4ysar"]
+script = ExtResource("3_220h4")
+currency_amounts = Array[ExtResource("2_ndgy0")]([SubResource("Resource_0yjcp")])
+
+[sub_resource type="Resource" id="Resource_ksgej"]
+script = ExtResource("6_gay8s")
+cost = SubResource("Resource_4ysar")
+name = "Lumberjack"
+scene_construction = ExtResource("5_5iuf7")
+scene_completed = ExtResource("4_tcwnn")
+
+[sub_resource type="Resource" id="Resource_qmq28"]
+script = ExtResource("2_ndgy0")
+currency = 2
+amount = 5.0
+
+[sub_resource type="Resource" id="Resource_epb2n"]
+script = ExtResource("3_220h4")
+currency_amounts = Array[ExtResource("2_ndgy0")]([SubResource("Resource_qmq28")])
+
+[sub_resource type="Resource" id="Resource_4j4xt"]
+script = ExtResource("6_gay8s")
+cost = SubResource("Resource_epb2n")
+name = "Farm"
+scene_construction = ExtResource("8_m1qyq")
+scene_completed = ExtResource("7_njgw4")
+
+[node name="PlacementController" type="VBoxContainer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+alignment = 2
+script = ExtResource("1_5gvqo")
+schematics = Array[ExtResource("6_gay8s")]([SubResource("Resource_ksgej"), SubResource("Resource_4j4xt")])
