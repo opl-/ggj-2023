@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b314pictkek5i"
+path="res://.godot/imported/Farm_SecondAge_Level1_Wheat.obj-98e8df4eb05133dccca717d1953ec77d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Farm_SecondAge_Level1_Wheat.obj-98e8df4eb05133dccca717d1953ec77d.mesh"]
+
+source_file="res://assets/mesh/Farm_SecondAge_Level1_Wheat.obj"
+dest_files=["res://.godot/imported/Farm_SecondAge_Level1_Wheat.obj-98e8df4eb05133dccca717d1953ec77d.mesh", "res://.godot/imported/Farm_SecondAge_Level1_Wheat.obj-98e8df4eb05133dccca717d1953ec77d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
