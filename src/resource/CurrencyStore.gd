@@ -7,7 +7,7 @@ func get_currency(currency: Const.Currency) -> CurrencyAmount:
 	return currency_amounts[currency] if (currency < currency_amounts.size()) else null
 
 func get_or_create_currency(currency: Const.Currency) -> CurrencyAmount:
-	var instance = get_currency(currency)
+	var instance := get_currency(currency)
 	if instance != null:
 		return instance
 	instance = CurrencyAmount.new()
@@ -24,7 +24,7 @@ func get_existing() -> Array[CurrencyAmount]:
 	return out
 
 func get_currency_amount(currency: Const.Currency) -> float:
-	var instance = get_currency(currency)
+	var instance := get_currency(currency)
 	return instance.amount if (instance != null) else 0
 
 func set_currency_amount(currency: Const.Currency, amount: float) -> float:
@@ -33,6 +33,6 @@ func set_currency_amount(currency: Const.Currency, amount: float) -> float:
 
 func increment_currency_amount(currency: Const.Currency, delta: float) -> float:
 	var instance := get_or_create_currency(currency)
-	var amount = instance.amount + delta
+	var amount := instance.amount + delta
 	instance.amount = amount
 	return amount

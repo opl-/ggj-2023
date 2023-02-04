@@ -40,17 +40,17 @@ func _input(event):
 
 	# TODO: support controller input (raycast from screen center)
 	if event is InputEventMouseMotion:
-		var camera = game_camera.camera_lens
+		var camera := game_camera.camera_lens
 
 		placement_ray_origin = camera.project_ray_origin(event.position)
 		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 150
 
 func _physics_process(_delta: float):
 	if placement_ghost != null && placement_ray_origin != null:
-		var space_state = game.get_world_3d().direct_space_state
+		var space_state: PhysicsDirectSpaceState3D = game.get_world_3d().direct_space_state
 
-		var query = PhysicsRayQueryParameters3D.create(placement_ray_origin, placement_ray_end, Const.Collision3D.TERRAIN)
-		var result = space_state.intersect_ray(query)
+		var query := PhysicsRayQueryParameters3D.create(placement_ray_origin, placement_ray_end, Const.Collision3D.TERRAIN)
+		var result := space_state.intersect_ray(query)
 
 		if result:
 			placement_ghost.position = result.position
@@ -74,7 +74,7 @@ func _physics_process(_delta: float):
 
 		# Drop reference to the ghost to make sure it doesn't get deleted
 		placement_ghost = null
-		var stored_schematic = selected_schematic
+		var stored_schematic := selected_schematic
 		selected_schematic = null
 
 		# TODO: support on controllers
@@ -86,7 +86,7 @@ func update_buttons():
 		remove_child(child)
 
 	for schematic in schematics:
-		var button = Button.new()
+		var button := Button.new()
 		button.text = schematic.name
 		button.pressed.connect(
 			func():

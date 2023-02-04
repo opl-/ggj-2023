@@ -29,7 +29,7 @@ func _process(delta: float):
 				request_currency.emit(remaining_cost.currency, clamp(remaining_cost.amount, 0, 1))
 
 func receive_currency(currency: Const.Currency, amount: float) -> bool:
-	var remaining_amount = remaining_costs.get_currency_amount(currency)
+	var remaining_amount := remaining_costs.get_currency_amount(currency)
 	if remaining_amount > 0:
 		remaining_costs.increment_currency_amount(currency, -amount)
 		for remaining_cost in remaining_costs.get_existing():

@@ -19,7 +19,7 @@ func bind_hubs():
 	# Find team hubs from map data
 	var hubs := find_children("*", "Hub")
 	for hub in hubs:
-		var hub_team = get_team(hub.team)
+		var hub_team := get_team(hub.team)
 		if hub_team.hub != null:
 			printerr("Found duplicate hub for team " + str(hub.team) + " at " + str(hub.get_path()))
 		else:
