@@ -27,6 +27,7 @@ grow_vertical = 2
 
 [node name="content" type="Control" parent="ui"]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="PlacementController" parent="ui/content" instance=ExtResource("4_qf6ns")]
 layout_mode = 1

@@ -14,13 +14,15 @@ var selected_schematic: BuildingSchematic:
 	get:
 		return selected_schematic
 	set(value):
-		if value == null:
-			if placement_ghost != null:
-				placement_ghost.queue_free()
-				game.tooltip.text = ""
-				placement_ghost = null
-				placement_ghost_collider = null
-		else:
+		if selected_schematic == value:
+			return
+
+		if placement_ghost != null:
+			placement_ghost.queue_free()
+			game.tooltip.text = ""
+			placement_ghost = null
+		placement_ghost_collider = null
+		if value != null:
 			# Create ghost
 			placement_ghost = value.scene_construction.instantiate()
 			var areas := placement_ghost.find_children("*", "Area3D")
@@ -43,15 +45,44 @@ func _ready():
 	update_buttons()
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		selected_schematic = null
-
 	# TODO: support controller input (raycast from screen center)
 	if event is InputEventMouseMotion:
 		var camera := game_camera.camera_lens
 
 		placement_ray_origin = camera.project_ray_origin(event.position)
 		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 150
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		selected_schematic = null
+		get_viewport().set_input_as_handled()
+
+	if placement_valid && placement_ghost != null && event.is_action_pressed("place"):
+		get_viewport().set_input_as_handled()
+
+		# Convert ghost into the construction site
+		var site: ConstructionSite = preload("res://object/building/ConstructionSiteTemplate.tscn").instantiate()
+		site.schematic = selected_schematic
+		site.team = team
+
+		# Move transform from ghost to construction site to make it easier to copy later to the constructed building.
+		site.transform = placement_ghost.transform
+		placement_ghost.transform = Transform3D.IDENTITY
+
+		placement_ghost.get_parent().remove_child(placement_ghost)
+		site.add_child(placement_ghost)
+		game.add_child(site)
+
+		# Drop reference to the ghost to make sure it doesn't get deleted
+		placement_ghost = null
+		placement_ghost_collider.monitoring = false
+		placement_ghost_collider = null
+		var stored_schematic := selected_schematic
+		selected_schematic = null
+
+		# TODO: support on controllers
+		if Input.is_action_pressed("place_multiple"):
+			selected_schematic = stored_schematic
 
 func _physics_process(_delta: float):
 	if placement_ghost != null:
@@ -82,31 +113,6 @@ func update_placement_ghost():
 		game.tooltip.text = "Invalid placement location"
 	else:
 		game.tooltip.text = ""
-
-	if placement_valid && Input.is_action_just_pressed("place"):
-		# Convert ghost into the construction site
-		var site: ConstructionSite = preload("res://object/building/ConstructionSiteTemplate.tscn").instantiate()
-		site.schematic = selected_schematic
-		site.team = team
-
-		# Move transform from ghost to construction site to make it easier to copy later to the constructed building.
-		site.transform = placement_ghost.transform
-		placement_ghost.transform = Transform3D.IDENTITY
-
-		placement_ghost.get_parent().remove_child(placement_ghost)
-		site.add_child(placement_ghost)
-		game.add_child(site)
-
-		# Drop reference to the ghost to make sure it doesn't get deleted
-		placement_ghost = null
-		placement_ghost_collider.monitoring = false
-		placement_ghost_collider = null
-		var stored_schematic := selected_schematic
-		selected_schematic = null
-
-		# TODO: support on controllers
-		if Input.is_action_pressed("place_multiple"):
-			selected_schematic = stored_schematic
 
 func update_buttons():
 	for child in get_children():
