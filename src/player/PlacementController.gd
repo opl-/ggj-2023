@@ -16,7 +16,7 @@ var selected_schematic: BuildingSchematic:
 	set(value):
 		if value == null:
 			if placement_ghost != null:
-				placement_ghost.get_parent().remove_child(placement_ghost)
+				placement_ghost.queue_free()
 				placement_ghost = null
 		else:
 			# Create ghost
@@ -35,6 +35,9 @@ func _ready():
 	update_buttons()
 
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		selected_schematic = null
+
 	# TODO: support controller input (raycast from screen center)
 	if event is InputEventMouseMotion:
 		var camera = game_camera.camera_lens
