@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp7nua1uyq7hc"]
+[gd_scene load_steps=5 format=3 uid="uid://bp7nua1uyq7hc"]
 
 [ext_resource type="Script" path="res://src/GameCamera.gd" id="1_wxqyt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cefue"]
+
+[sub_resource type="Sky" id="Sky_bxcsu"]
+sky_material = SubResource("ProceduralSkyMaterial_cefue")
+
+[sub_resource type="Environment" id="Environment_ts3aq"]
+background_mode = 2
+sky = SubResource("Sky_bxcsu")
+sdfgi_enabled = true
 
 [node name="camera" type="Node3D"]
 script = ExtResource("1_wxqyt")
@@ -12,4 +22,5 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="camera" type="Camera3D" parent="pivot/arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+environment = SubResource("Environment_ts3aq")
 current = true
