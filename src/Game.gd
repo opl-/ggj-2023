@@ -1,6 +1,8 @@
 class_name Game
 extends Node
 
+@onready var anchor : Node3D = $"map/buildings"
+
 var team_data = {
 	Const.Team.PLAYER: TeamData.new(self),
 	Const.Team.ENEMY: TeamData.new(self),

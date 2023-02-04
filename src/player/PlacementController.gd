@@ -31,7 +31,7 @@ var selected_schematic: BuildingSchematic:
 			if areas.size() > 0:
 				placement_ghost_collider = areas[0] as Area3D
 				placement_ghost_collider.monitoring = true
-			game.add_child(placement_ghost)
+			game.anchor.add_child(placement_ghost)
 
 		selected_schematic = value
 
