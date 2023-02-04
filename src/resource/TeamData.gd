@@ -7,6 +7,9 @@ var game: Game
 
 var links: Array[BuildingLink] = []
 
+## Stores a list of all existing buildings owned by this team.
+var buildings: Array[Building] = []
+
 ## Sent when a new building owned by this team appears on the map.
 signal building_placed(building: Building)
 
@@ -20,6 +23,8 @@ func _init(_game: Game):
 	building_destroyed.connect(on_building_destroyed)
 
 func on_building_placed(building: Building):
+	buildings.push_back(building)
+
 	# TODO: dev code - immediately grant requsted currency
 	building.connect(
 		"request_currency",
@@ -31,3 +36,4 @@ func on_building_placed(building: Building):
 
 func on_building_destroyed(building: Building):
 	game.building_destroyed.emit(building)
+	buildings.remove_at(buildings.find(building))
