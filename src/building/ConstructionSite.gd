@@ -7,9 +7,12 @@ var request_countdown: float = 0
 
 var remaining_costs := CurrencyStore.new()
 
+var building_scene : Node3D
+
 func _ready():
 	super._ready()
 
+	building_scene.set_scale(Vector3(1.0, 0.1, 1.0))
 	for cost in schematic.cost.get_existing():
 		remaining_costs.set_currency_amount(cost.currency, cost.amount)
 
@@ -25,6 +28,18 @@ func _process(delta: float):
 		for remaining_cost in remaining_costs.get_existing():
 			if remaining_cost.amount > 0:
 				request_currency.emit(remaining_cost.currency, clamp(remaining_cost.amount, 0, 1))
+
+	var total_cost : float = 0.0
+	var required_costs : float = 0.0
+	for cost in schematic.cost.get_existing():
+		total_cost += cost.amount
+	for remaining_cost in remaining_costs.get_existing():
+		required_costs += remaining_cost.amount
+
+	if total_cost > 0:
+		var progress : float = float(total_cost - required_costs) / float(total_cost)
+		building_scene.set_scale(Vector3(1.0, 0.1 + progress * 0.9, 1.0))
+
 
 func receive_currency(currency: Const.Currency, amount: float) -> bool:
 	var remaining_amount := remaining_costs.get_currency_amount(currency)

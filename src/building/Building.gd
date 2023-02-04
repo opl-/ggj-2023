@@ -32,7 +32,6 @@ func _process(_delta: float):
 func on_building_placed(other_building: Building):
 	# Check if the other building is in range.
 	var distance_sq := position.distance_squared_to(other_building.position)
-	print("adding link")
 	if (distance_sq > max_link_length_sq or distance_sq < 1.0):
 		return
 
