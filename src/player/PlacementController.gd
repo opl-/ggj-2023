@@ -52,7 +52,7 @@ func _input(event):
 		var camera := game_camera.camera_lens
 
 		placement_ray_origin = camera.project_ray_origin(event.position)
-		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 150
+		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 750
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):

@@ -41,7 +41,6 @@ func on_building_placed(other_building: Building):
 	links.push_back(BuildingLink.new(self, other_building, link_view))
 	other_building.links.push_back(BuildingLink.new(other_building, self, link_view))
 	link_view.build_curve(self.global_position, other_building.global_position)
-	await get_tree().create_timer(0.1).timeout
 	game.add_child(link_view)
 
 func on_building_destroyed(other_building: Building):

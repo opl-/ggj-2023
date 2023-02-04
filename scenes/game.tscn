@@ -10,7 +10,8 @@
 script = ExtResource("1_lw3oy")
 
 [node name="camera" parent="." instance=ExtResource("2_qtqhs")]
-camera_distance_max = 100
+camera_distance_min = 50
+camera_distance_max = 150
 
 [node name="map" parent="." instance=ExtResource("2_rgn1w")]
 

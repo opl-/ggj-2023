@@ -49,6 +49,7 @@ func _ready() -> void:
 	camera_angle_x = current_rotation.x
 	_camera_angle_x = current_rotation.x
 
+	self.camera_lens.set_position(Vector3(0, 0, camera_distance_min))
 	current_rotation = self.camera_lens.get_position()
 	camera_distance = current_rotation.z
 	_camera_distance = current_rotation.z
