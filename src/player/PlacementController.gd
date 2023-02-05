@@ -1,5 +1,7 @@
 extends Control
 
+const TEXT_INVALID_PLACEMENT := "Invalid placement location"
+
 @onready var game:  = $"/root/game"
 
 @onready var game_camera: GameCamera = game.find_child("camera")
@@ -21,6 +23,8 @@ var selected_schematic: BuildingSchematic:
 	set(value):
 		if selected_schematic == value:
 			return
+
+		placement_valid = false
 
 		# Update button press status.
 		if selected_schematic != null:
@@ -63,7 +67,7 @@ func _input(event):
 		placement_ray_origin = camera.project_ray_origin(event.position)
 		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 750
 
-		if !placement_valid:
+		if selected_schematic == null || placement_valid:
 			var hovering_button := false
 			# Set tooltip text to the description of the schematic the player is hovering over.
 			for button_index in schematic_buttons.size():
@@ -136,8 +140,8 @@ func update_placement_ghost():
 		placement_valid = false
 
 	if !placement_valid:
-		game.tooltip.text = "Invalid placement location"
-	else:
+		game.tooltip.text = TEXT_INVALID_PLACEMENT
+	elif game.tooltip.text == TEXT_INVALID_PLACEMENT:
 		game.tooltip.text = ""
 
 func update_buttons():
