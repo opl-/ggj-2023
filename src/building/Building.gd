@@ -24,6 +24,7 @@ var info_panel: BuildingInfoPanel
 
 @export var max_hp: float = 100.0
 @export var hp: float = 100.0
+var requested_hp: float = 0.0
 
 signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
@@ -47,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	if pollution_change != 0:
 		_process_pollution(delta)
 	_process_damage(delta)
+	_process_repair(delta)
 
 func _process_pollution(delta: float) -> void:
 	game.pollution.increment_at_world(global_position, pollution_change * delta)
@@ -58,6 +60,11 @@ func _process_damage(delta: float) -> void:
 
 	if hp <= 0.0:
 		destroy()
+
+func _process_repair(_delta: float) -> void:
+	if (hp + requested_hp) < max_hp:
+		request_currency.emit(self, Const.Currency.WOOD, 1.0)
+		requested_hp += 1.0
 
 func destroy():
 	game.get_team(team).building_destroyed.emit(self)
@@ -87,4 +94,8 @@ func on_building_destroyed(other_building: Building):
 ## Called when the building is supposed to obtain currency. Custom building types should override this function.
 ## If false is returned, the currency is rejected, and presumably could go back to some pool.
 func receive_currency(_currency: Const.Currency, _amount: float) -> bool:
+	if requested_hp > 0.0 and _currency == Const.Currency.WOOD:
+		hp = clamp(hp + 1.0, 0.0, max_hp)
+		requested_hp -= 1.0
+		return true
 	return false

@@ -24,13 +24,13 @@ func _update_ammo_bar() -> void:
 
 
 func _process_pollution(delta: float) -> void:
-	var pollution: float = game.pollution.get_at_world(global_position)
+	var pollution: float = game.pollution.get_around_at_world(global_position)
 	if magazine > 0.0 and pollution > 0.5:
 		cd += delta
 		if cd >= pollution_tick_cd:
 			cd = 0.0
 			magazine = clampf(magazine - 1.0, 0.0, max_ammo)
-			game.pollution.increment_at_world(global_position, pollution_change * pollution_tick_cd)
+			game.pollution.increment_around_at_world(global_position, pollution_change * pollution_tick_cd)
 			_update_ammo_bar()
 			request_currency.emit(self, ammo_currency, 1.0)
 	else:
@@ -38,6 +38,8 @@ func _process_pollution(delta: float) -> void:
 
 
 func receive_currency(currency: Const.Currency, amount: float) -> bool:
+	if super.receive_currency(currency, amount):
+		return true
 	if currency == ammo_currency and magazine < max_ammo:
 		magazine = clampf(magazine + amount, 0.0, max_ammo)
 		_update_ammo_bar()

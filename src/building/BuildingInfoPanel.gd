@@ -16,7 +16,7 @@ func _process(_delta) -> void:
 		return
 	_update(building.hp, building.max_hp)
 
-func _update(hp: int, max_hp: int) -> void:
+func _update(hp: float, max_hp: float) -> void:
 	if hp == max_hp:
 		health_bar.hide()
 	else:

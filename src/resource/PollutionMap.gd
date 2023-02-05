@@ -2,6 +2,7 @@ class_name PollutionMap
 extends Resource
 
 const CHUNK_SIDE: float = 16
+const sides := [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
 var pollution: Array[float] = []
 
@@ -59,7 +60,18 @@ func increment_at_world(position: Vector3, change: float) -> float:
 	var index := world_position_to_index(position)
 	return set_at_index(index, get_at_index(index) + change)
 
-const sides := [[-1, 0], [1, 0], [0, -1], [0, 1]]
+func get_around_at_world(position: Vector3) -> float:
+	var sum: float = get_at_world(position)
+	for side in sides:
+		sum += get_at_world(position + Vector3(side[0], 0, side[1]))
+	return sum
+
+func increment_around_at_world(position: Vector3, change: float) -> float:
+	var sum: float = increment_at_world(position, change)
+	for side in sides:
+		sum += increment_at_world(position + Vector3(side[0], 0, side[1]), change)
+	return sum
+
 
 func propagate():
 	temp_pollution.assign(pollution)
