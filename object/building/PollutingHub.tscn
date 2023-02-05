@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://e4prklq3e12n"]
+
+[ext_resource type="PackedScene" uid="uid://dm1fs7o10va5q" path="res://object/building/Hub.tscn" id="1_8x3rp"]
+[ext_resource type="ArrayMesh" uid="uid://da2gixin2sk6j" path="res://assets/mesh/CommonTree_Dead_2.obj" id="2_vq6j0"]
+[ext_resource type="ArrayMesh" uid="uid://ds2n7cj378ddj" path="res://assets/mesh/Flat.obj" id="3_x67jj"]
+
+[node name="PollutingHub" instance=ExtResource("1_8x3rp")]
+
+[node name="MeshInstance3D" parent="." index="1"]
+mesh = ExtResource("2_vq6j0")
+
+[node name="MeshInstance3D2" parent="." index="2"]
+mesh = ExtResource("3_x67jj")

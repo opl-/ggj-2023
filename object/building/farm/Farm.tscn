@@ -1,12 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://decsu8gpcwrc7"]
+[gd_scene load_steps=9 format=3 uid="uid://decsu8gpcwrc7"]
 
 [ext_resource type="Script" path="res://src/building/Building.gd" id="1_a8b6g"]
 [ext_resource type="PackedScene" uid="uid://cvv8majkmnpsw" path="res://object/building/farm/FarmCommon.tscn" id="1_ayp8x"]
+[ext_resource type="Script" path="res://src/resource/CurrencyAmount.gd" id="2_6sr40"]
+[ext_resource type="Script" path="res://src/resource/CurrencyStore.gd" id="3_81nv1"]
 [ext_resource type="ArrayMesh" uid="uid://dchbyuobgod3l" path="res://assets/mesh/Farm_SecondAge_Level1.obj" id="3_ku4os"]
 [ext_resource type="ArrayMesh" uid="uid://b314pictkek5i" path="res://assets/mesh/Farm_SecondAge_Level1_Wheat.obj" id="4_olkk7"]
 
+[sub_resource type="Resource" id="Resource_xuylm"]
+script = ExtResource("2_6sr40")
+currency = 1
+amount = 0.9
+
+[sub_resource type="Resource" id="Resource_4f7xr"]
+script = ExtResource("3_81nv1")
+currency_amounts = Array[ExtResource("2_6sr40")]([SubResource("Resource_xuylm")])
+
 [node name="Farm" type="Node3D"]
 script = ExtResource("1_a8b6g")
+currency_modifier = SubResource("Resource_4f7xr")
 
 [node name="FarmCommon" parent="." instance=ExtResource("1_ayp8x")]
 
