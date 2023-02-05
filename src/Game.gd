@@ -1,6 +1,9 @@
 class_name Game
 extends Node
 
+const MAP_WIDTH: int = 128
+const MAP_HEIGHT: int = 128
+
 @onready var anchor : Node3D = $"buildings"
 
 var team_data = {
@@ -10,7 +13,7 @@ var team_data = {
 
 @onready var tooltip: Tooltip = $"ui/Tooltip"
 
-var pollution := PollutionMap.new()
+var pollution := PollutionMap.new(MAP_WIDTH, MAP_HEIGHT)
 
 ## Time until next pollution propagation.
 var pollution_propagation_delay: float = 0

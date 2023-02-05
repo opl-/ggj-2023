@@ -5,10 +5,13 @@ var pollution: Array[float] = []
 
 var temp_pollution: Array[float] = []
 
-const width: int = 128
-const height: int = 128
+var width: int = 0
+var height: int = 0
 
-func _init():
+func _init(_width: int, _height: int):
+	width = _width
+	height = _height
+
 	pollution.resize(width * height)
 	temp_pollution.resize(pollution.size())
 
