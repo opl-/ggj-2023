@@ -1,14 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://djay6a4xpppim"]
+[gd_scene load_steps=9 format=3 uid="uid://djay6a4xpppim"]
 
 [ext_resource type="Script" path="res://src/resource/ResourcePacket.gd" id="1_ccl6h"]
 
-[sub_resource type="Curve3D" id="Curve3D_gpl4f"]
+[sub_resource type="Curve3D" id="Curve3D_0o58r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8w1ll"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7oghb"]
 albedo_color = Color(0.223529, 0.654902, 1, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_of1bt"]
-material = SubResource("StandardMaterial3D_8w1ll")
+[sub_resource type="SphereMesh" id="SphereMesh_v2bja"]
+material = SubResource("StandardMaterial3D_7oghb")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fiu8"]
+albedo_color = Color(0.415686, 0.235294, 0.00784314, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dmax7"]
+material = SubResource("StandardMaterial3D_4fiu8")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_df0td"]
+albedo_color = Color(0.909804, 0.498039, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_km4n8"]
+material = SubResource("StandardMaterial3D_df0td")
 radius = 2.0
 height = 4.0
 
@@ -16,12 +32,22 @@ height = 4.0
 script = ExtResource("1_ccl6h")
 
 [node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_gpl4f")
+curve = SubResource("Curve3D_0o58r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 loop = false
 
-[node name="mesh" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+[node name="culture" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
 visible = false
-mesh = SubResource("SphereMesh_of1bt")
+mesh = SubResource("SphereMesh_v2bja")
+skeleton = NodePath("../../..")
+
+[node name="wood" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+visible = false
+mesh = SubResource("SphereMesh_dmax7")
+skeleton = NodePath("../../..")
+
+[node name="people" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+visible = false
+mesh = SubResource("SphereMesh_km4n8")
 skeleton = NodePath("../../..")

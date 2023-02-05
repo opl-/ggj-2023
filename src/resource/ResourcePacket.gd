@@ -12,7 +12,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var follow := $"Path3D/PathFollow3D"
 	follow.set_progress(follow.get_progress() + speed * delta)
-	$"Path3D/PathFollow3D/mesh".show()
+	match payload.currency:
+		Const.Currency.CULTURE:
+			$"Path3D/PathFollow3D/culture".show()
+		Const.Currency.WOOD:
+			$"Path3D/PathFollow3D/wood".show()
+		Const.Currency.PEOPLE:
+			$"Path3D/PathFollow3D/people".show()
 
 	if follow.get_progress_ratio() >= 1.0:
 		_deliver()

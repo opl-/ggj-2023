@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://decsu8gpcwrc7"]
+[gd_scene load_steps=10 format=3 uid="uid://decsu8gpcwrc7"]
 
 [ext_resource type="Script" path="res://src/building/Building.gd" id="1_a8b6g"]
 [ext_resource type="PackedScene" uid="uid://cvv8majkmnpsw" path="res://object/building/farm/FarmCommon.tscn" id="1_ayp8x"]
@@ -12,9 +12,14 @@ script = ExtResource("2_6sr40")
 currency = 1
 amount = 0.9
 
+[sub_resource type="Resource" id="Resource_532d3"]
+script = ExtResource("2_6sr40")
+currency = 0
+amount = 1.0
+
 [sub_resource type="Resource" id="Resource_4f7xr"]
 script = ExtResource("3_81nv1")
-currency_amounts = Array[ExtResource("2_6sr40")]([SubResource("Resource_xuylm")])
+currency_amounts = Array[ExtResource("2_6sr40")]([SubResource("Resource_xuylm"), SubResource("Resource_532d3")])
 
 [node name="Farm" type="Node3D"]
 script = ExtResource("1_a8b6g")
