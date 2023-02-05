@@ -1,7 +1,7 @@
 class_name Building
 extends Node3D
 
-const RANGE : int = 50
+const RANGE : int = 25
 
 @onready var game: Game = $"/root/game"
 
@@ -46,13 +46,14 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if pollution_change != 0:
 		_process_pollution(delta)
+	_process_damage(delta)
 
 func _process_pollution(delta: float) -> void:
 	game.pollution.increment_at_world(global_position, pollution_change * delta)
 
 func _process_damage(delta: float) -> void:
 	var pollution: float = game.pollution.get_at_world(global_position)
-	if pollution > 5.0:
+	if pollution > 1.0:
 		hp = clampf(hp - pollution * delta, 0.0, max_hp)
 
 	if hp <= 0.0:

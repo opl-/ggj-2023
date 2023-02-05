@@ -15,6 +15,7 @@ func _ready() -> void:
 	var team_data := game.get_team(team)
 	for currency in Const.Currency.values():
 		currency_generators[currency] = ResourceGenerator.new(team_data, currency)
+	_process_pollution(1.0)
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -103,7 +104,7 @@ func _process_damage(delta: float) -> void:
 		super._process_damage(delta)
 	else:
 		var pollution: float = game.pollution.get_at_world(global_position)
-		if pollution < 5.0:
+		if pollution < 1.0:
 			hp = clampf(hp - 5.0 * delta, 0.0, max_hp)
 
 		if hp <= 0.0:

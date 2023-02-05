@@ -76,7 +76,7 @@ func propagate():
 				var nvalue := get_at_index(nindex)
 
 				# If the neighbor tile has more than 50% more pollution, take 2% of its pollution.
-				if nvalue > 0 && value / nvalue < 0.5:
+				if nvalue > 0 && value / nvalue < 0.2:
 					var change := nvalue * 0.02
 					temp_pollution[nindex] -= change
 					temp_pollution[index] += change

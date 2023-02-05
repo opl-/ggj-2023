@@ -24,7 +24,8 @@ func _update_ammo_bar() -> void:
 
 
 func _process_pollution(delta: float) -> void:
-	if magazine > 0.0:
+	var pollution: float = game.pollution.get_at_world(global_position)
+	if magazine > 0.0 and pollution > 0.5:
 		cd += delta
 		if cd >= pollution_tick_cd:
 			cd = 0.0
@@ -32,6 +33,8 @@ func _process_pollution(delta: float) -> void:
 			game.pollution.increment_at_world(global_position, pollution_change * pollution_tick_cd)
 			_update_ammo_bar()
 			request_currency.emit(self, ammo_currency, 1.0)
+	else:
+		cd = 0.0
 
 
 func receive_currency(currency: Const.Currency, amount: float) -> bool:

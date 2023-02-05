@@ -27,7 +27,7 @@ func create():
 func update_image():
 	for x in pollution_map.width:
 		for z in pollution_map.height:
-			var value := int(clamp(pollution_map.get_at(x, z) * 10, 0, 128))
+			var value := int(clamp(pollution_map.get_at(x, z) * 128, 0, 255))
 			image.set_pixel(x, z, Color.hex(0xffffff00 + value))
 
 	image_texture.update(image)

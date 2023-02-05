@@ -7,6 +7,7 @@
 [node name="House" type="Node3D"]
 script = ExtResource("1_1glg5")
 ammo_currency = 0
+max_ammo = 100.0
 pollution_change = -1.0
 
 [node name="HouseCommon" parent="." instance=ExtResource("4_i145o")]
