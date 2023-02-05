@@ -10,6 +10,7 @@ var links: Array[BuildingLink] = []
 ## Stores a list of all existing buildings owned by this team.
 var buildings: Array[Building] = []
 var cycles: Dictionary = {}
+var transport_speed: float = 10.0
 
 ## Sent when a new building owned by this team appears on the map.
 signal building_placed(building: Building)

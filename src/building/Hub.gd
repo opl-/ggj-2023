@@ -66,6 +66,7 @@ func _dispatch_order(order: ResourceOrder) -> void:
 
 
 	var team_data := game.get_team(team)
+	packet.speed = team_data.transport_speed
 	team_data.building_destroyed.connect(packet.on_building_destroyed)
 
 func on_building_placed(other_building: Building) -> void:
