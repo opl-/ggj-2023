@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bj84gsosgl17m"]
+[gd_scene load_steps=20 format=3 uid="uid://bj84gsosgl17m"]
 
 [ext_resource type="Script" path="res://src/player/PlacementController.gd" id="1_5gvqo"]
 [ext_resource type="Script" path="res://src/resource/CurrencyAmount.gd" id="2_ndgy0"]
@@ -8,11 +8,13 @@
 [ext_resource type="Script" path="res://src/resource/BuildingSchematic.gd" id="6_gay8s"]
 [ext_resource type="PackedScene" uid="uid://decsu8gpcwrc7" path="res://object/building/farm/Farm.tscn" id="7_njgw4"]
 [ext_resource type="PackedScene" uid="uid://h0a7yvfmrr1r" path="res://object/building/farm/FarmConstruction.tscn" id="8_m1qyq"]
+[ext_resource type="PackedScene" uid="uid://bnw4u6otnopob" path="res://object/building/house/House.tscn" id="9_t22to"]
+[ext_resource type="PackedScene" uid="uid://blyqlfhe17h1q" path="res://object/building/house/HouseConstruction.tscn" id="10_rjsi6"]
 
 [sub_resource type="Resource" id="Resource_0yjcp"]
 script = ExtResource("2_ndgy0")
 currency = 2
-amount = 2.0
+amount = 30.0
 
 [sub_resource type="Resource" id="Resource_4ysar"]
 script = ExtResource("3_220h4")
@@ -29,7 +31,7 @@ scene_completed = ExtResource("4_tcwnn")
 [sub_resource type="Resource" id="Resource_qmq28"]
 script = ExtResource("2_ndgy0")
 currency = 2
-amount = 5.0
+amount = 120.0
 
 [sub_resource type="Resource" id="Resource_epb2n"]
 script = ExtResource("3_220h4")
@@ -43,10 +45,27 @@ description = "Produces food, which is required for your people to research and 
 scene_construction = ExtResource("8_m1qyq")
 scene_completed = ExtResource("7_njgw4")
 
+[sub_resource type="Resource" id="Resource_yunp5"]
+script = ExtResource("2_ndgy0")
+currency = 2
+amount = 60.0
+
+[sub_resource type="Resource" id="Resource_os7nf"]
+script = ExtResource("3_220h4")
+currency_amounts = Array[ExtResource("2_ndgy0")]([SubResource("Resource_yunp5")])
+
+[sub_resource type="Resource" id="Resource_0bmh4"]
+script = ExtResource("6_gay8s")
+cost = SubResource("Resource_os7nf")
+name = "House"
+description = "Rural house full of brave people trying to stay true to their roots"
+scene_construction = ExtResource("10_rjsi6")
+scene_completed = ExtResource("9_t22to")
+
 [node name="PlacementController" type="VBoxContainer"]
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
 alignment = 2
 script = ExtResource("1_5gvqo")
-schematics = Array[ExtResource("6_gay8s")]([SubResource("Resource_ksgej"), SubResource("Resource_4j4xt")])
+schematics = Array[ExtResource("6_gay8s")]([SubResource("Resource_ksgej"), SubResource("Resource_4j4xt"), SubResource("Resource_0bmh4")])
