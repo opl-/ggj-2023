@@ -40,12 +40,16 @@ func _ready():
 	info_panel.position.y = 15
 	add_child(info_panel)
 
-func _process(_delta: float):
+func _process(_delta: float) -> void:
 	pass
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if pollution_change != 0:
-		game.pollution.increment_at_world(global_position, pollution_change * delta)
+		_process_pollution(delta)
+
+func _process_pollution(delta: float) -> void:
+	game.pollution.increment_at_world(global_position, pollution_change * delta)
+
 
 func destroy():
 	game.get_team(team).building_destroyed.emit(self)

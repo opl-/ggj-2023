@@ -14,7 +14,7 @@
 [sub_resource type="Resource" id="Resource_0yjcp"]
 script = ExtResource("2_ndgy0")
 currency = 2
-amount = 30.0
+amount = 10.0
 
 [sub_resource type="Resource" id="Resource_4ysar"]
 script = ExtResource("3_220h4")
@@ -31,7 +31,7 @@ scene_completed = ExtResource("4_tcwnn")
 [sub_resource type="Resource" id="Resource_qmq28"]
 script = ExtResource("2_ndgy0")
 currency = 2
-amount = 120.0
+amount = 20.0
 
 [sub_resource type="Resource" id="Resource_epb2n"]
 script = ExtResource("3_220h4")
@@ -48,7 +48,7 @@ scene_completed = ExtResource("7_njgw4")
 [sub_resource type="Resource" id="Resource_yunp5"]
 script = ExtResource("2_ndgy0")
 currency = 2
-amount = 60.0
+amount = 15.0
 
 [sub_resource type="Resource" id="Resource_os7nf"]
 script = ExtResource("3_220h4")

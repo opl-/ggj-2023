@@ -3,7 +3,9 @@ extends Building
 
 @export var ammo_currency: Const.Currency
 @export var max_ammo: float = 10.0
+@export var pollution_tick_cd: float = 0.5
 var magazine: float = 0.0
+var cd: float = 0.0
 
 var ammo_bar: BuildingInfoPanel
 
@@ -19,6 +21,18 @@ func _ready() -> void:
 
 func _update_ammo_bar() -> void:
 	ammo_bar._update(int(magazine), int(max_ammo))
+
+
+func _process_pollution(delta: float) -> void:
+	if magazine > 0.0:
+		cd += delta
+		if cd >= pollution_tick_cd:
+			cd = 0.0
+			magazine = clampf(magazine - 1.0, 0.0, max_ammo)
+			game.pollution.increment_at_world(global_position, pollution_change * pollution_tick_cd)
+			_update_ammo_bar()
+			request_currency.emit(self, ammo_currency, 1.0)
+
 
 func receive_currency(currency: Const.Currency, amount: float) -> bool:
 	if currency == ammo_currency and magazine < max_ammo:
