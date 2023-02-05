@@ -22,8 +22,8 @@ var links: Array[BuildingLink] = []
 
 var info_panel: BuildingInfoPanel
 
-@export var max_hp: int = 100
-@export var hp: int = 100
+@export var max_hp: float = 100.0
+@export var hp: float = 100.0
 
 signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
@@ -50,6 +50,13 @@ func _physics_process(delta: float) -> void:
 func _process_pollution(delta: float) -> void:
 	game.pollution.increment_at_world(global_position, pollution_change * delta)
 
+func _process_damage(delta: float) -> void:
+	var pollution: float = game.pollution.get_at_world(global_position)
+	if pollution > 5.0:
+		hp = clampf(hp - pollution * delta, 0.0, max_hp)
+
+	if hp <= 0.0:
+		destroy()
 
 func destroy():
 	game.get_team(team).building_destroyed.emit(self)

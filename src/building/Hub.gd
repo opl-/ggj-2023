@@ -97,3 +97,14 @@ func place_order(destination: Building, currency: Const.Currency, amount: float)
 			destination,
 			currency_amount
 		))
+
+func _process_damage(delta: float) -> void:
+	if team == Const.Team.PLAYER:
+		super._process_damage(delta)
+	else:
+		var pollution: float = game.pollution.get_at_world(global_position)
+		if pollution < 5.0:
+			hp = clampf(hp - 5.0 * delta, 0.0, max_hp)
+
+		if hp <= 0.0:
+			destroy()
