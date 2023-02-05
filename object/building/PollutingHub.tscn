@@ -5,6 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ds2n7cj378ddj" path="res://assets/mesh/Flat.obj" id="3_x67jj"]
 
 [node name="PollutingHub" instance=ExtResource("1_8x3rp")]
+pollution_change = 10.0
 
 [node name="MeshInstance3D" parent="." index="1"]
 mesh = ExtResource("2_vq6j0")
