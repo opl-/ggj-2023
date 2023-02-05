@@ -1,7 +1,7 @@
 class_name Game
 extends Node
 
-@onready var anchor : Node3D = $"map/buildings"
+@onready var anchor : Node3D = $"buildings"
 
 var team_data = {
 	Const.Team.PLAYER: TeamData.new(self),
@@ -17,11 +17,16 @@ signal building_placed(building: Building)
 signal building_destroyed(building: Building)
 
 func _ready():
+	load_map()
+
 	bind_hubs()
+
+func load_map():
+	add_child(preload("res://scenes/map.tscn").instantiate())
 
 func bind_hubs():
 	# Find team hubs from map data
-	var hubs := find_children("*", "Hub")
+	var hubs := find_children("*", "Hub", true, false)
 	for hub in hubs:
 		var hub_team := get_team(hub.team)
 		if hub_team.hub != null:

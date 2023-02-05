@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b46742ymk7abw"]
+[gd_scene load_steps=5 format=3 uid="uid://b46742ymk7abw"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_lw3oy"]
 [ext_resource type="PackedScene" uid="uid://bp7nua1uyq7hc" path="res://scenes/camera.tscn" id="2_qtqhs"]
-[ext_resource type="PackedScene" uid="uid://ctx3btlhk2m8b" path="res://scenes/map.tscn" id="2_rgn1w"]
 [ext_resource type="PackedScene" uid="uid://bj84gsosgl17m" path="res://object/ui/PlacementController.tscn" id="4_qf6ns"]
 [ext_resource type="PackedScene" uid="uid://cx1ri8k311rba" path="res://object/ui/Tooltip.tscn" id="12_g0wb6"]
 
@@ -13,7 +12,7 @@ script = ExtResource("1_lw3oy")
 camera_distance_min = 25
 camera_distance_max = 150
 
-[node name="map" parent="." instance=ExtResource("2_rgn1w")]
+[node name="buildings" type="Node3D" parent="."]
 
 [node name="ui" type="MarginContainer" parent="."]
 anchors_preset = 15
