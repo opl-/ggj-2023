@@ -7,8 +7,16 @@ var remaining_costs := CurrencyStore.new()
 
 var building_scene : Node3D
 
+var building_progress: BuildingInfoPanel
+
 func _ready():
 	super._ready()
+	# Create building info panel
+	building_progress = preload("res://object/BuildingInfoPanel.tscn").instantiate()
+	building_progress.building = self
+	building_progress.position.y = 13
+	building_progress.autoupdate = false
+	add_child(building_progress)
 
 	building_scene.set_scale(Vector3(1.0, 0.1, 1.0))
 	for cost in schematic.cost.get_existing():
@@ -53,3 +61,4 @@ func _grow_building_model() -> void:
 	if total_cost > 0:
 		var progress : float = float(total_cost - required_costs) / float(total_cost)
 		building_scene.set_scale(Vector3(1.0, 0.1 + progress * 0.9, 1.0))
+		building_progress._update(int(total_cost - required_costs), int(total_cost))

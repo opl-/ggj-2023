@@ -22,6 +22,9 @@ var links: Array[BuildingLink] = []
 
 var info_panel: BuildingInfoPanel
 
+@export var max_hp: int = 100
+@export var hp: int = 100
+
 signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
 func _ready():

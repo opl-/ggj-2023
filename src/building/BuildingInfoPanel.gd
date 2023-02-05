@@ -5,9 +5,21 @@ extends Node3D
 
 @onready var health_bar: TextureProgressBar = $"Sprite3D/SubViewport/container/healthBar"
 
-func _ready():
-	($"Sprite3D" as Sprite3D).texture = ($"Sprite3D/SubViewport" as SubViewport).get_texture()
+var autoupdate: bool = true
 
-func _update():
-	health_bar.max_value = 100
-	health_bar.value = 50
+func _ready() -> void:
+	($"Sprite3D" as Sprite3D).texture = ($"Sprite3D/SubViewport" as SubViewport).get_texture()
+	health_bar.hide()
+
+func _process(_delta) -> void:
+	if not autoupdate:
+		return
+	_update(building.hp, building.max_hp)
+
+func _update(hp: int, max_hp: int) -> void:
+	if hp == max_hp:
+		health_bar.hide()
+	else:
+		health_bar.show()
+		health_bar.max_value = max_hp
+		health_bar.value = hp
