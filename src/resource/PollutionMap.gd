@@ -59,9 +59,11 @@ func increment_at_world(position: Vector3, change: float) -> float:
 	var index := world_position_to_index(position)
 	return set_at_index(index, get_at_index(index) + change)
 
-const sides := [[-1, 0], [1, 0, [0, -1], [0, 1]]]
+const sides := [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
 func propagate():
+	temp_pollution.assign(pollution)
+
 	# The n prefix stands for neighbor.
 	for x in width:
 		for z in height:
@@ -73,9 +75,9 @@ func propagate():
 				var nindex := get_index(nx, nz)
 				var nvalue := get_at_index(nindex)
 
-				# If the current tile has more than 50% more pollution, make it take 10% of pollution from the neighbor.
+				# If the neighbor tile has more than 50% more pollution, take 10% of its pollution.
 				if nvalue > 0 && value / nvalue < 0.5:
-					var change = nvalue * 0.1
+					var change := nvalue * 0.1
 					temp_pollution[nindex] -= change
 					temp_pollution[index] += change
 
