@@ -10,6 +10,11 @@ var team_data = {
 
 @onready var tooltip: Tooltip = $"ui/Tooltip"
 
+var pollution := PollutionMap.new()
+
+## Time until next pollution propagation.
+var pollution_propagation_delay: float = 0
+
 ## Sent when a new building appears on the map
 signal building_placed(building: Building)
 
@@ -20,6 +25,12 @@ func _ready():
 	load_map()
 
 	bind_hubs()
+
+func _physics_process(delta: float):
+	pollution_propagation_delay -= delta
+	if pollution_propagation_delay <= 0:
+		pollution_propagation_delay += 0.5
+		pollution.propagate()
 
 func load_map():
 	add_child(preload("res://scenes/map.tscn").instantiate())

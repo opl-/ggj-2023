@@ -17,6 +17,9 @@ var link_view_template := preload("res://object/building/Link.tscn")
 ## Stores all links to other buildings.
 var links: Array[BuildingLink] = []
 
+## Amount by which this building chanages the pollution in the chunk it resides in.
+var pollution_change: float
+
 signal request_currency(currency: Const.Currency, amount: float)
 
 func _ready():
@@ -28,6 +31,10 @@ func _ready():
 
 func _process(_delta: float):
 	pass
+
+func _physics_process(delta: float):
+	if pollution_change != 0:
+		game.pollution.increment_at_world(global_position, pollution_change * delta)
 
 func destroy():
 	game.get_team(team).building_destroyed.emit(self)
