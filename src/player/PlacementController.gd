@@ -22,6 +22,12 @@ var selected_schematic: BuildingSchematic:
 		if selected_schematic == value:
 			return
 
+		# Update button press status.
+		if selected_schematic != null:
+			schematic_buttons[schematics.find(selected_schematic)].release_focus()
+		if value != null:
+			schematic_buttons[schematics.find(value)].grab_focus()
+
 		if placement_ghost != null:
 			placement_ghost.queue_free()
 			game.tooltip.text = ""
