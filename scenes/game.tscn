@@ -10,6 +10,7 @@
 script = ExtResource("1_lw3oy")
 
 [node name="camera" parent="." instance=ExtResource("2_qtqhs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.913, 1.52588e-05, 129.698)
 camera_distance_min = 25
 camera_distance_max = 150
 
