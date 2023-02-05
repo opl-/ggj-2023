@@ -1,7 +1,7 @@
 class_name PollutionMap
 extends Resource
 
-const CHUNK_SIDE: float = 10
+const CHUNK_SIDE: float = 4
 
 var pollution: Array[float] = []
 
@@ -75,9 +75,9 @@ func propagate():
 				var nindex := get_index(nx, nz)
 				var nvalue := get_at_index(nindex)
 
-				# If the neighbor tile has more than 50% more pollution, take 10% of its pollution.
+				# If the neighbor tile has more than 50% more pollution, take 2% of its pollution.
 				if nvalue > 0 && value / nvalue < 0.5:
-					var change := nvalue * 0.1
+					var change := nvalue * 0.02
 					temp_pollution[nindex] -= change
 					temp_pollution[index] += change
 

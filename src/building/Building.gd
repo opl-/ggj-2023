@@ -18,7 +18,7 @@ var link_view_template := preload("res://object/building/Link.tscn")
 var links: Array[BuildingLink] = []
 
 ## Amount by which this building chanages the pollution in the chunk it resides in.
-var pollution_change: float
+@export var pollution_change: float = 0.0
 
 signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
