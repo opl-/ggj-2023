@@ -36,7 +36,7 @@ func get_at_index(index: int) -> float:
 func set_at_index(index: int, value: float) -> float:
 	if index == -1:
 		return 0.0
-	pollution[index] = value
+	pollution[index] = max(0.0, value)
 	return value
 
 func set_at(x: float, z: float, value: float) -> float:
