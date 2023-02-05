@@ -74,7 +74,7 @@ func _unhandled_input(event):
 		placement_ghost.get_parent().remove_child(placement_ghost)
 		site.add_child(placement_ghost)
 		site.building_scene = placement_ghost
-		game.add_child(site)
+		game.anchor.add_child(site)
 
 		# Drop reference to the ghost to make sure it doesn't get deleted
 		placement_ghost = null

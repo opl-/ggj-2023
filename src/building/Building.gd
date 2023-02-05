@@ -20,7 +20,7 @@ var links: Array[BuildingLink] = []
 ## Amount by which this building chanages the pollution in the chunk it resides in.
 var pollution_change: float
 
-signal request_currency(currency: Const.Currency, amount: float)
+signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
 func _ready():
 	var team_data := game.get_team(team)

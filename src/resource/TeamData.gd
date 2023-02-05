@@ -24,16 +24,13 @@ func _init(_game: Game):
 
 func on_building_placed(building: Building):
 	buildings.push_back(building)
-
-	# TODO: dev code - immediately grant requsted currency
-	building.connect(
-		"request_currency",
-		func(currency: Const.Currency, amount: float):
-			building.receive_currency(currency, amount)
-	)
-
+	building.request_currency.connect(_on_resource_requested)
 	game.building_placed.emit(building)
+
 
 func on_building_destroyed(building: Building):
 	game.building_destroyed.emit(building)
 	buildings.remove_at(buildings.find(building))
+
+func _on_resource_requested(building: Building, currency: Const.Currency, amount: float):
+	hub.place_order(building, currency, amount)

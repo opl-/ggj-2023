@@ -3,8 +3,6 @@ extends Building
 
 var schematic: BuildingSchematic
 
-var request_countdown: float = 0
-
 var remaining_costs := CurrencyStore.new()
 
 var building_scene : Node3D
@@ -15,30 +13,14 @@ func _ready():
 	building_scene.set_scale(Vector3(1.0, 0.1, 1.0))
 	for cost in schematic.cost.get_existing():
 		remaining_costs.set_currency_amount(cost.currency, cost.amount)
+		request_currency.emit(self, cost.currency, cost.amount)
 
 	if remaining_costs.currency_amounts.size() == 0:
 		finish_construction()
 
 func _process(delta: float):
 	super._process(delta)
-
-	request_countdown -= delta
-	if request_countdown <= 0:
-		request_countdown = 2
-		for remaining_cost in remaining_costs.get_existing():
-			if remaining_cost.amount > 0:
-				request_currency.emit(remaining_cost.currency, clamp(remaining_cost.amount, 0, 1))
-
-	var total_cost : float = 0.0
-	var required_costs : float = 0.0
-	for cost in schematic.cost.get_existing():
-		total_cost += cost.amount
-	for remaining_cost in remaining_costs.get_existing():
-		required_costs += remaining_cost.amount
-
-	if total_cost > 0:
-		var progress : float = float(total_cost - required_costs) / float(total_cost)
-		building_scene.set_scale(Vector3(1.0, 0.1 + progress * 0.9, 1.0))
+	_grow_building_model()
 
 
 func receive_currency(currency: Const.Currency, amount: float) -> bool:
@@ -59,3 +41,15 @@ func finish_construction():
 	building.global_transform = global_transform
 	get_parent().add_child(building)
 	destroy()
+
+func _grow_building_model() -> void:
+	var total_cost : float = 0.0
+	var required_costs : float = 0.0
+	for cost in schematic.cost.get_existing():
+		total_cost += cost.amount
+	for remaining_cost in remaining_costs.get_existing():
+		required_costs += remaining_cost.amount
+
+	if total_cost > 0:
+		var progress : float = float(total_cost - required_costs) / float(total_cost)
+		building_scene.set_scale(Vector3(1.0, 0.1 + progress * 0.9, 1.0))

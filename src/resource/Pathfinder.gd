@@ -2,11 +2,23 @@ class_name Pathfinder
 
 var paths : Dictionary = {}
 
+func can_reach(destination: Building) -> bool:
+	return paths.has(destination.get_instance_id())
+
+func get_path(destination: Building) -> Dictionary:
+	if not can_reach(destination):
+		return  {
+			"distance" : 0.0,
+			"path": []
+		}
+
+	return paths[destination.get_instance_id()]
+
 func retrace(hub: Hub) -> void:
 	var new_paths : Dictionary = {
 		hub.get_instance_id() : {
 			"distance" : 0.0,
-			"path": []
+			"path": [hub.position]
 		}
 	}
 
@@ -14,7 +26,6 @@ func retrace(hub: Hub) -> void:
 		_traverse_link(link, new_paths)
 
 	paths = new_paths
-	print(paths)
 
 func _traverse_link(link: BuildingLink, new_paths: Dictionary) -> void:
 	var current_path : Dictionary = new_paths[link.from.get_instance_id()]
