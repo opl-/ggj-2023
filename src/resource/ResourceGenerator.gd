@@ -17,6 +17,8 @@ func _process(delta) -> void:
 		production_progress = 0.0
 		return
 
+	production_cycle = team.cycles[currency]
+
 	production_progress += delta
 	if production_progress >= production_cycle:
 		is_resource_available = true
