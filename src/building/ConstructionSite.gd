@@ -54,7 +54,6 @@ func receive_currency(currency: Const.Currency, amount: float) -> bool:
 	return false
 
 func finish_construction():
-	var team_data := game.get_team(team)
 	var building: Building = schematic.scene_completed.instantiate()
 	building.team = team
 	building.global_transform = global_transform
