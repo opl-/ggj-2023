@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bybjyqwix45v2"]
+
+[ext_resource type="Script" path="res://src/GameEnd.gd" id="1_yo4a3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5qeb4"]
+font_size = 30
+
+[node name="PlayerWin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yo4a3")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.3
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "~ You win! ~"
+label_settings = SubResource("LabelSettings_5qeb4")
+horizontal_alignment = 1

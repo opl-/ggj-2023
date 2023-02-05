@@ -13,6 +13,7 @@ sky = SubResource("Sky_bxcsu")
 sdfgi_enabled = true
 
 [node name="camera" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_wxqyt")
 
 [node name="pivot" type="Node3D" parent="."]

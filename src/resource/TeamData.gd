@@ -42,6 +42,18 @@ func on_building_destroyed(building: Building):
 	buildings.remove_at(buildings.find(building))
 	_refresh_cycles()
 
+	# Check win/lose conditions
+	if building == hub:
+		var ui := game.find_child("ui")
+		var scene_path := ""
+		match hub.team:
+			Const.Team.PLAYER:
+				scene_path = "res://scenes/PlayerLose.tscn"
+			Const.Team.ENEMY:
+				scene_path = "res://scenes/PlayerWin.tscn"
+		if scene_path.length() > 0:
+			ui.add_child((load(scene_path) as PackedScene).instantiate())
+
 func _on_resource_requested(building: Building, currency: Const.Currency, amount: float):
 	hub.place_order(building, currency, amount)
 
