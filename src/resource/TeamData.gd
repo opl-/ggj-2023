@@ -11,6 +11,11 @@ var links: Array[BuildingLink] = []
 var buildings: Array[Building] = []
 var cycles: Dictionary = {}
 var transport_speed: float = 10.0
+var house_power: float = -1.0
+var resource_produced: int = 1
+var hp_multiplier: int = 1
+
+var stats: Dictionary = {}
 
 ## Sent when a new building owned by this team appears on the map.
 signal building_placed(building: Building)
@@ -67,3 +72,44 @@ func _get_resource_cycle_time(currency: Const.Currency) -> float:
 				cycle *= 0.95
 
 	return cycle
+
+
+func get_stat_level(stat: Const.Upgrade) -> int:
+	if not stats.has(stat):
+		stats[stat] = {
+			"level": 1,
+			"progress": 0,
+			"required": 0,
+		}
+	return stats[stat]["level"]
+
+func upgrade_stat(stat: Const.Upgrade) -> void:
+	var current_level = get_stat_level(stat)
+	if stats[stat]["required"] > 0:
+		return
+	stats[stat]["required"] = current_level * 1000
+
+func get_stat_progress(stat: Const.Upgrade) -> Array[int]:
+	if not stats.has(stat):
+		stats[stat] = {
+			"level": 1,
+			"progress": 0,
+			"required": 0,
+		}
+	return [stats[stat]["progress"], stats[stat]["required"]]
+
+func update_stats() -> void:
+	var base_value: float
+
+	base_value = 10.0
+	for i in get_stat_level(Const.Upgrade.SPEED):
+		base_value *= 1.1
+	transport_speed = base_value
+
+	base_value = -1.0
+	for i in get_stat_level(Const.Upgrade.POWER):
+		base_value *= 1.1
+	house_power = base_value
+
+	resource_produced = get_stat_level(Const.Upgrade.RESOURCE)
+	hp_multiplier = get_stat_level(Const.Upgrade.HP)

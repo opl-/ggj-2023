@@ -6,6 +6,7 @@ const RANGE : int = 25
 @onready var game: Game = $"/root/game"
 
 @export var team: Const.Team
+var team_data: TeamData
 
 ## How much the building can produce.
 @export var currency_modifier := CurrencyStore.new()
@@ -23,13 +24,14 @@ var links: Array[BuildingLink] = []
 var info_panel: BuildingInfoPanel
 
 @export var max_hp: float = 100.0
+var base_max_hp: float
 @export var hp: float = 100.0
 var requested_hp: float = 0.0
 
 signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
 func _ready():
-	var team_data := game.get_team(team)
+	team_data = game.get_team(team)
 
 	team_data.building_placed.emit(self)
 	team_data.building_placed.connect(on_building_placed)
@@ -41,8 +43,12 @@ func _ready():
 	info_panel.position.y = 15
 	add_child(info_panel)
 
+	base_max_hp = max_hp
+	hp *= team_data.hp_multiplier
+	max_hp *= team_data.hp_multiplier
+
 func _process(_delta: float) -> void:
-	pass
+	max_hp = base_max_hp * team_data.hp_multiplier
 
 func _physics_process(delta: float) -> void:
 	if pollution_change != 0:

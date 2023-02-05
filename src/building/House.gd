@@ -30,7 +30,7 @@ func _process_pollution(delta: float) -> void:
 		if cd >= pollution_tick_cd:
 			cd = 0.0
 			magazine = clampf(magazine - 1.0, 0.0, max_ammo)
-			game.pollution.increment_around_at_world(global_position, pollution_change * pollution_tick_cd)
+			game.pollution.increment_around_at_world(global_position, team_data.house_power * pollution_tick_cd)
 			_update_ammo_bar()
 			request_currency.emit(self, ammo_currency, 1.0)
 	else:

@@ -12,7 +12,6 @@ var resource_packet_template := preload("res://object/building/ResourcePacket.ts
 func _ready() -> void:
 	super._ready()
 
-	var team_data := game.get_team(team)
 	for currency in Const.Currency.values():
 		currency_generators[currency] = ResourceGenerator.new(team_data, currency)
 	_process_pollution(1.0)
@@ -25,10 +24,11 @@ func _process(delta: float) -> void:
 		self.pathfinder.retrace(self)
 	_process_resource_generation(delta)
 	_process_resource_dispatch(delta)
+	_process_upgrades(delta)
 
 func _process_resource_generation(delta: float) -> void:
 	for generator in currency_generators.values():
-		generator._process(delta)
+		generator._process(delta, team_data.resource_produced)
 
 func _process_resource_dispatch(_delta: float) -> void:
 	var generator: ResourceGenerator
@@ -40,14 +40,14 @@ func _process_resource_dispatch(_delta: float) -> void:
 		unreachable_orders = []
 		if currency_orders[currency].size() > 0:
 			generator = currency_generators[currency]
-			if generator.is_resource_available:
+			while generator.resource_available > 0 and currency_orders[currency].size() > 0:
 				order = currency_orders[currency].pop_front()
 
 				if not order.valid:
 					continue
 
 				if pathfinder.can_reach(order.destination):
-					generator.is_resource_available = false
+					generator.resource_available -= 1
 					_dispatch_order(order)
 				else:
 					unreachable_orders.append(order)
@@ -65,10 +65,20 @@ func _dispatch_order(order: ResourceOrder) -> void:
 	packet.destination = order.destination
 	get_parent().add_child(packet)
 
-
-	var team_data := game.get_team(team)
 	packet.speed = team_data.transport_speed
 	team_data.building_destroyed.connect(packet.on_building_destroyed)
+
+func _process_upgrades(_delta: float) -> void:
+	for stat in team_data.stats:
+		if team_data.stats[stat]["required"] > 0:
+			if currency_generators[Const.Currency.PEOPLE].resource_available > 0:
+				team_data.stats[stat]["progress"] += currency_generators[Const.Currency.PEOPLE].resource_available
+				currency_generators[Const.Currency.PEOPLE].resource_available = 0
+				if team_data.stats[stat]["progress"] >= team_data.stats[stat]["required"]:
+					team_data.stats[stat]["progress"] = 0
+					team_data.stats[stat]["required"] = 0
+					team_data.stats[stat]["level"] += 1
+					team_data.update_stats()
 
 func on_building_placed(other_building: Building) -> void:
 	super.on_building_placed(other_building)

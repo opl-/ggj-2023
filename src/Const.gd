@@ -15,3 +15,10 @@ enum Collision3D {
 	TERRAIN = 2,
 	BUILDING = 3,
 }
+
+enum Upgrade {
+	SPEED,
+	POWER,
+	RESOURCE,
+	HP,
+}
