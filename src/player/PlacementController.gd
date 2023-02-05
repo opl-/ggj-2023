@@ -12,6 +12,9 @@ var site_template := preload("res://object/building/ConstructionSiteTemplate.tsc
 ## Buildings available for placement.
 @export var schematics: Array[BuildingSchematic] = []
 
+## Stores the buttons used to select a schematic.
+var schematic_buttons: Array[Button]
+
 var selected_schematic: BuildingSchematic:
 	get:
 		return selected_schematic
@@ -53,6 +56,20 @@ func _input(event):
 
 		placement_ray_origin = camera.project_ray_origin(event.position)
 		placement_ray_end = placement_ray_origin + camera.project_ray_normal(event.position) * 750
+
+		if !placement_valid:
+			var hovering_button := false
+			# Set tooltip text to the description of the schematic the player is hovering over.
+			for button_index in schematic_buttons.size():
+				var button := schematic_buttons[button_index]
+				if button.is_hovered():
+					var schematic := schematics[button_index]
+					game.tooltip.text = schematic.name + "\n\n" + schematic.description
+					hovering_button = true
+					break
+
+			if !hovering_button:
+				game.tooltip.text = ""
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -118,10 +135,14 @@ func update_placement_ghost():
 		game.tooltip.text = ""
 
 func update_buttons():
-	for child in get_children():
+	for child in schematic_buttons:
+		child.queue_free()
 		remove_child(child)
 
-	for schematic in schematics:
+	schematic_buttons.resize(schematics.size())
+
+	for schematic_index in schematics.size():
+		var schematic := schematics[schematic_index]
 		var button := Button.new()
 		button.text = schematic.name
 		button.pressed.connect(
@@ -131,4 +152,5 @@ func update_buttons():
 				else:
 					selected_schematic = schematic
 		)
+		schematic_buttons[schematic_index] = button
 		add_child(button)

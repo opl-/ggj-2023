@@ -22,6 +22,7 @@ currency_amounts = Array[ExtResource("2_ndgy0")]([SubResource("Resource_0yjcp")]
 script = ExtResource("6_gay8s")
 cost = SubResource("Resource_4ysar")
 name = "Lumberjack"
+description = "Produces wood, which is required to construct buildings."
 scene_construction = ExtResource("5_5iuf7")
 scene_completed = ExtResource("4_tcwnn")
 
@@ -38,6 +39,7 @@ currency_amounts = Array[ExtResource("2_ndgy0")]([SubResource("Resource_qmq28")]
 script = ExtResource("6_gay8s")
 cost = SubResource("Resource_epb2n")
 name = "Farm"
+description = "Produces food, which is required for your people to research and prosper."
 scene_construction = ExtResource("8_m1qyq")
 scene_completed = ExtResource("7_njgw4")
 

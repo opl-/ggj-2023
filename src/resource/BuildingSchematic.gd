@@ -6,6 +6,8 @@ extends Resource
 
 @export var name: String
 
+@export_multiline var description: String
+
 ## Scene showing the building during construction. Script will be replaced by a ConstructionSite building, until it's completed.
 @export var scene_construction: PackedScene
 
