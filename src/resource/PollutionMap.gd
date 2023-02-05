@@ -63,13 +63,13 @@ func increment_at_world(position: Vector3, change: float) -> float:
 func get_around_at_world(position: Vector3) -> float:
 	var sum: float = get_at_world(position)
 	for side in sides:
-		sum += get_at_world(position + Vector3(side[0], 0, side[1]))
+		sum += get_at_world(position + Vector3(side[0] * CHUNK_SIDE, 0, side[1] * CHUNK_SIDE))
 	return sum
 
 func increment_around_at_world(position: Vector3, change: float) -> float:
 	var sum: float = increment_at_world(position, change)
 	for side in sides:
-		sum += increment_at_world(position + Vector3(side[0], 0, side[1]), change)
+		sum += increment_at_world(position + Vector3(side[0] * CHUNK_SIDE, 0, side[1] * CHUNK_SIDE), change)
 	return sum
 
 
