@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctx3btlhk2m8b"]
+[gd_scene load_steps=25 format=3 uid="uid://ctx3btlhk2m8b"]
 
 [ext_resource type="Shader" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="1_oo8lf"]
 [ext_resource type="Texture2D" uid="uid://c4ggdp0kg5wjk" path="res://addons/simplegrasstextured/textures/grassbushcc008.png" id="2_ngfa4"]
@@ -14,7 +14,7 @@ albedo_color = Color(0.270588, 0.529412, 0.152941, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_d66bj"]
 size = Vector3(512, 0.1, 512)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pe8e3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alnbw"]
 render_priority = 0
 shader = ExtResource("1_oo8lf")
 shader_parameter/player_pos = Vector3(1e+06, 1e+06, 1e+06)
@@ -46,7 +46,7 @@ _surfaces = [{
 "format": 4123,
 "index_count": 12,
 "index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 3, 0, 1, 0, 0, 0, 4, 0, 5, 0, 6, 0, 7, 0, 5, 0, 4, 0),
-"material": SubResource("ShaderMaterial_pe8e3"),
+"material": SubResource("ShaderMaterial_alnbw"),
 "primitive": 3,
 "vertex_count": 8,
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 128, 63, 0, 0, 0, 0, 255, 127, 255, 127, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 255, 127, 255, 127, 0, 0, 0, 191, 0, 0, 0, 0, 0, 0, 0, 0, 255, 127, 255, 127, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 0, 255, 127, 255, 127, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 191, 0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 191, 0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 63, 0, 0, 255, 127)
@@ -92,6 +92,9 @@ size = Vector3(97.6045, 39.6618, 308.549)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tyx0d"]
 size = Vector3(97.6045, 39.6618, 308.549)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sfa17"]
+size = Vector3(82.4728, 39.6618, 103.744)
 
 [node name="map" type="Node3D"]
 
@@ -188,3 +191,11 @@ shape = SubResource("BoxShape3D_mru8p")
 [node name="CollisionShape3D10" type="CollisionShape3D" parent="collider"]
 transform = Transform3D(0.686212, 0, -0.727402, 0, 1, 0, 0.727402, 0, 0.686212, -22.1174, -5.72269, 338.516)
 shape = SubResource("BoxShape3D_tyx0d")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="collider"]
+transform = Transform3D(-0.962663, 0, -0.270701, 0, 1, 0, 0.270701, 0, -0.962663, 189.494, -5.72269, 293.41)
+shape = SubResource("BoxShape3D_sfa17")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="collider"]
+transform = Transform3D(-0.344757, 0, 0.938692, 0, 1, 0, -0.938692, 0, -0.344757, 455.489, -5.72272, 378.774)
+shape = SubResource("BoxShape3D_sfa17")
