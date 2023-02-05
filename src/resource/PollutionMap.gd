@@ -1,7 +1,7 @@
 class_name PollutionMap
 extends Resource
 
-const CHUNK_SIDE: float = 4
+const CHUNK_SIDE: float = 16
 
 var pollution: Array[float] = []
 
