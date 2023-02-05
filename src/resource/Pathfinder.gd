@@ -24,7 +24,7 @@ func _traverse_link(link: BuildingLink, new_paths: Dictionary) -> void:
 	}
 	for path_part in current_path["path"]:
 		new_path["path"].append(path_part)
-	new_path["path"].append(link)
+	new_path["path"].append(link.to.position)
 
 
 	if new_paths.has(link.to.get_instance_id()):

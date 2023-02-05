@@ -21,4 +21,5 @@ func on_building_placed(other_building: Building):
 
 func on_building_destroyed(other_building: Building):
 	super.on_building_destroyed(other_building)
-	self.refresh_paths = true
+	if not other_building is ConstructionSite:
+		self.refresh_paths = true
