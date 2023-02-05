@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b46742ymk7abw"]
+[gd_scene load_steps=6 format=3 uid="uid://b46742ymk7abw"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_lw3oy"]
 [ext_resource type="PackedScene" uid="uid://bp7nua1uyq7hc" path="res://scenes/camera.tscn" id="2_qtqhs"]
 [ext_resource type="PackedScene" uid="uid://bj84gsosgl17m" path="res://object/ui/PlacementController.tscn" id="4_qf6ns"]
+[ext_resource type="PackedScene" uid="uid://chrkfrl7ntho5" path="res://object/PollutionOverlay.tscn" id="5_oxc40"]
 [ext_resource type="PackedScene" uid="uid://cx1ri8k311rba" path="res://object/ui/Tooltip.tscn" id="12_g0wb6"]
 
 [node name="game" type="Node3D"]
@@ -34,3 +35,5 @@ layout_mode = 1
 
 [node name="Tooltip" parent="ui" instance=ExtResource("12_g0wb6")]
 layout_mode = 2
+
+[node name="PollutionOverlay" parent="." instance=ExtResource("5_oxc40")]

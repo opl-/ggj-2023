@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://chrkfrl7ntho5"]
+
+[ext_resource type="Script" path="res://src/PollutionOverlay.gd" id="1_4mohg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_re2y3"]
+transparency = 1
+albedo_color = Color(0.168627, 0.152941, 0.0588235, 1)
+texture_filter = 1
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_k16xc"]
+material = SubResource("StandardMaterial3D_re2y3")
+
+[node name="PollutionOverlay" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_k16xc")
+script = ExtResource("1_4mohg")

@@ -15,6 +15,8 @@ var team_data = {
 
 var pollution := PollutionMap.new(MAP_WIDTH, MAP_HEIGHT)
 
+@onready var pollution_overlay: PollutionOverlay = $"PollutionOverlay"
+
 ## Time until next pollution propagation.
 var pollution_propagation_delay: float = 0
 
@@ -34,6 +36,7 @@ func _physics_process(delta: float):
 	if pollution_propagation_delay <= 0:
 		pollution_propagation_delay += 0.5
 		pollution.propagate()
+		pollution_overlay.update_image()
 
 func load_map():
 	add_child(preload("res://scenes/map.tscn").instantiate())
