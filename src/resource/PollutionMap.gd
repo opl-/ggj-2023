@@ -1,6 +1,8 @@
 class_name PollutionMap
 extends Resource
 
+const CHUNK_SIDE: float = 10
+
 var pollution: Array[float] = []
 
 var temp_pollution: Array[float] = []
@@ -24,7 +26,7 @@ func world_to_index(x: float, z: float) -> int:
 	return get_index(floor(x), floor(z))
 
 func world_position_to_index(vector: Vector3) -> int:
-	return world_to_index(vector.x, vector.z)
+	return world_to_index(vector.x / CHUNK_SIDE, vector.z / CHUNK_SIDE)
 
 func get_at_index(index: int) -> float:
 	if index == -1:
