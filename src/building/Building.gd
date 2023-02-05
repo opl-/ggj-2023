@@ -20,6 +20,8 @@ var links: Array[BuildingLink] = []
 ## Amount by which this building chanages the pollution in the chunk it resides in.
 @export var pollution_change: float = 0.0
 
+var info_panel: BuildingInfoPanel
+
 signal request_currency(building: Building, currency: Const.Currency, amount: float)
 
 func _ready():
@@ -28,6 +30,12 @@ func _ready():
 	team_data.building_placed.emit(self)
 	team_data.building_placed.connect(on_building_placed)
 	team_data.building_destroyed.connect(on_building_destroyed)
+
+	# Create building info panel
+	info_panel = preload("res://object/BuildingInfoPanel.tscn").instantiate()
+	info_panel.building = self
+	info_panel.position.y = 15
+	add_child(info_panel)
 
 func _process(_delta: float):
 	pass
