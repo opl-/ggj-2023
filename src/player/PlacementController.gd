@@ -126,6 +126,9 @@ func update_buttons():
 		button.text = schematic.name
 		button.pressed.connect(
 			func():
-				selected_schematic = schematic
+				if selected_schematic == schematic:
+					selected_schematic = null
+				else:
+					selected_schematic = schematic
 		)
 		add_child(button)
