@@ -119,3 +119,6 @@ func _process_damage(delta: float) -> void:
 
 		if hp <= 0.0:
 			destroy()
+
+func _process_repair(_delta: float) -> void:
+	return

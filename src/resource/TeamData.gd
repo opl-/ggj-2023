@@ -87,7 +87,7 @@ func upgrade_stat(stat: Const.Upgrade) -> void:
 	var current_level = get_stat_level(stat)
 	if stats[stat]["required"] > 0:
 		return
-	stats[stat]["required"] = current_level * 1000
+	stats[stat]["required"] = current_level * 100
 
 func get_stat_progress(stat: Const.Upgrade) -> Array[int]:
 	if not stats.has(stat):
